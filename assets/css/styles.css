@@ -1,0 +1,2195 @@
+/* ==========================================================================
+   OAK & WHIMSY — HEIRLOOM WOODEN TOYS
+   Pure Handcrafted Woodcraft • Zero Plastics • Sustainable Artistry
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..800&family=Homemade+Apple&display=swap');
+
+/* --- CSS Root Variables & Design Tokens --- */
+:root {
+  /* Natural Timber & Earth Palette */
+  --timber-900: #1c1008;
+  --timber-800: #2d1b10;
+  --timber-700: #422918;
+  --timber-600: #5c3b24;
+  --timber-500: #7a4f31;
+  --timber-400: #9e6943;
+  --timber-300: #c28c61;
+  --timber-200: #ddb288;
+  --timber-100: #f1dbc2;
+  --timber-50:  #faf4ec;
+
+  /* Honey Oak & Warm Accents */
+  --honey-400:  #d9822b;
+  --honey-500:  #c26f1c;
+  --honey-600:  #a65a12;
+  --forest-800: #1b2f23;
+  --forest-600: #2c4c38;
+  --forest-400: #467657;
+  --terracotta: #c45b3a;
+  
+  /* Background & Surface Naturals */
+  --bg-cream:   #fbf8f3;
+  --bg-sand:    #f5eee4;
+  --surface-white: #ffffff;
+  --surface-warm:  #fdfbf7;
+  --border-light: rgba(92, 59, 36, 0.12);
+  --border-med:   rgba(92, 59, 36, 0.22);
+
+  /* Typography */
+  --font-display: 'Fraunces', serif;
+  --font-body:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-engrave: 'Fraunces', 'Playfair Display', serif;
+  --font-script:  'Homemade Apple', cursive;
+
+  /* Elevation Shadows with warm timber undertones */
+  --shadow-xs: 0 1px 2px rgba(44, 26, 14, 0.05);
+  --shadow-sm: 0 4px 8px rgba(44, 26, 14, 0.06), 0 1px 3px rgba(44, 26, 14, 0.04);
+  --shadow-md: 0 10px 24px rgba(44, 26, 14, 0.08), 0 3px 6px rgba(44, 26, 14, 0.04);
+  --shadow-lg: 0 20px 40px rgba(44, 26, 14, 0.11), 0 6px 12px rgba(44, 26, 14, 0.05);
+  --shadow-xl: 0 32px 64px -12px rgba(44, 26, 14, 0.18);
+  --shadow-glow: 0 0 45px rgba(217, 130, 43, 0.22);
+
+  /* Transitions */
+  --ease-gentle: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 0.2s var(--ease-gentle);
+  --transition-normal: 0.35s var(--ease-gentle);
+  --transition-slow: 0.6s var(--ease-gentle);
+
+  /* Layout */
+  --max-width: 1320px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-xl: 36px;
+  --radius-full: 9999px;
+}
+
+/* --- Base Reset & Global Styles --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-cream);
+  color: var(--timber-900);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--bg-cream);
+  background-image: 
+    radial-gradient(ellipse at 15% 10%, rgba(221, 178, 136, 0.15), transparent 45%),
+    radial-gradient(ellipse at 85% 60%, rgba(196, 91, 58, 0.07), transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(70, 118, 87, 0.08), transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Subtle Organic Wood Grain Pattern Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: repeating-radial-gradient(ellipse at 30% 20%, #301809, #301809 1px, transparent 1px, transparent 7px);
+  z-index: 9999;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+/* --- Typography Helpers --- */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--timber-900);
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(194, 111, 28, 0.08);
+  border: 1px solid rgba(194, 111, 28, 0.22);
+  color: var(--honey-600);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-badge .badge-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--timber-900);
+  margin-bottom: 16px;
+  letter-spacing: -0.015em;
+}
+
+.section-desc {
+  font-size: 1.12rem;
+  color: var(--timber-600);
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* --- Top Announcement Bar --- */
+.announcement-bar {
+  background: var(--timber-900);
+  color: var(--timber-100);
+  font-size: 0.84rem;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 101;
+}
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.announcement-marquee {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-weight: 500;
+}
+
+.announcement-marquee span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.announcement-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.audio-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--timber-100);
+  background: rgba(255, 255, 255, 0.09);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.audio-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.audio-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.audio-pulse.muted {
+  background: #f87171;
+  box-shadow: 0 0 8px #f87171;
+}
+
+/* --- Navigation Header --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 248, 243, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.site-header.scrolled {
+  background: rgba(251, 248, 243, 0.96);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 84px;
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-symbol {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--timber-800), var(--timber-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--timber-100);
+  box-shadow: 0 4px 12px rgba(45, 27, 16, 0.25);
+  transition: transform var(--transition-normal);
+}
+
+.brand-logo:hover .logo-symbol {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--timber-900);
+}
+
+.logo-tagline {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--honey-600);
+  font-weight: 600;
+}
+
+/* Nav Menu Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: var(--timber-700);
+  position: relative;
+  padding: 8px 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--honey-500);
+  transition: width var(--transition-normal);
+  border-radius: 2px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--timber-900);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+/* Nav Actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.action-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--timber-800);
+  background: var(--surface-warm);
+  border: 1px solid var(--border-light);
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.action-btn:hover {
+  background: var(--surface-white);
+  border-color: var(--honey-500);
+  color: var(--honey-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.action-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--terracotta);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-cream);
+}
+
+.btn-header-cta {
+  background: var(--timber-800);
+  color: var(--timber-50);
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--timber-700);
+  transition: all var(--transition-normal);
+}
+
+.btn-header-cta:hover {
+  background: var(--timber-900);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(44, 26, 14, 0.2);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+  position: relative;
+  padding: 60px 0 90px;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-subhead {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(194, 111, 28, 0.1);
+  border: 1px solid rgba(194, 111, 28, 0.25);
+  padding: 7px 18px;
+  border-radius: var(--radius-full);
+  color: var(--honey-600);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 4.4vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  color: var(--timber-900);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.hero-title span.highlight-italic {
+  font-style: italic;
+  color: var(--honey-500);
+  position: relative;
+}
+
+.hero-desc {
+  font-size: 1.18rem;
+  line-height: 1.75;
+  color: var(--timber-600);
+  margin-bottom: 36px;
+  max-width: 580px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+/* Primary Wooden Button */
+.btn-primary {
+  background: linear-gradient(135deg, var(--timber-800), var(--timber-700));
+  color: var(--timber-50);
+  padding: 16px 36px;
+  border-radius: var(--radius-full);
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--timber-600);
+  box-shadow: 0 10px 24px rgba(45, 27, 16, 0.22);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: 0.6s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(45, 27, 16, 0.28);
+}
+
+.btn-primary:hover::after {
+  left: 100%;
+}
+
+.btn-secondary {
+  background: var(--surface-warm);
+  color: var(--timber-800);
+  padding: 16px 32px;
+  border-radius: var(--radius-full);
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border-med);
+  transition: all var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-white);
+  border-color: var(--timber-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Hero Key Pillars / Guarantee Badges */
+.hero-guarantees {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+}
+
+.guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guarantee-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(70, 118, 87, 0.12);
+  color: var(--forest-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guarantee-text h4 {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--timber-800);
+}
+
+.guarantee-text p {
+  font-size: 0.78rem;
+  color: var(--timber-500);
+}
+
+/* Hero Visual Showcase */
+.hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-main-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: var(--surface-white);
+  transition: transform var(--transition-normal);
+}
+
+.hero-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  background: #ecdccb;
+}
+
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-gentle);
+}
+
+.hero-main-card:hover .hero-image-wrap img {
+  transform: scale(1.04);
+}
+
+/* Floating Sensory Badges */
+.floating-badge {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 5;
+  transition: transform var(--transition-normal);
+}
+
+.floating-badge:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.badge-top-left {
+  top: 24px;
+  left: -24px;
+}
+
+.badge-bottom-right {
+  bottom: 24px;
+  right: -24px;
+}
+
+.badge-round-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--honey-400);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge-round-icon.forest {
+  background: var(--forest-600);
+}
+
+.badge-details h5 {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--timber-900);
+}
+
+.badge-details p {
+  font-size: 0.78rem;
+  color: var(--timber-600);
+}
+
+/* Hero Floating Accent Ornaments */
+.ornament-leaf {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+/* --- Stats Bar Section --- */
+.stats-banner {
+  background: var(--timber-900);
+  color: var(--timber-100);
+  padding: 48px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.stat-card {
+  position: relative;
+}
+
+.stat-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -16px;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--honey-400);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.92rem;
+  color: var(--timber-100);
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* --- Section: Wood Species Explorer (Tactile Learning) --- */
+.woods-section {
+  padding: 100px 0;
+  background: var(--surface-warm);
+  position: relative;
+}
+
+.species-selector {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 40px 0 48px;
+}
+
+.species-tab {
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  background: var(--surface-white);
+  border: 1px solid var(--border-med);
+  color: var(--timber-700);
+  font-weight: 600;
+  font-size: 0.98rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all var(--transition-fast);
+}
+
+.species-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.species-tab:hover {
+  border-color: var(--honey-500);
+  color: var(--timber-900);
+  transform: translateY(-2px);
+}
+
+.species-tab.active {
+  background: var(--timber-800);
+  color: var(--timber-50);
+  border-color: var(--timber-800);
+  box-shadow: var(--shadow-md);
+}
+
+.species-display-card {
+  background: var(--surface-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  transition: all var(--transition-normal);
+}
+
+.species-visual {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #d8ab6f, #523420);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.wood-texture-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.35;
+  background: repeating-linear-gradient(45deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 10px, transparent 10px, transparent 20px);
+}
+
+.species-visual-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 24px;
+}
+
+.species-visual-content h3 {
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.species-visual-content p {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.species-details h4 {
+  font-size: 1.8rem;
+  color: var(--timber-900);
+  margin-bottom: 6px;
+}
+
+.species-botanical {
+  font-size: 0.94rem;
+  font-style: italic;
+  color: var(--honey-600);
+  margin-bottom: 24px;
+}
+
+.species-specs-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.spec-box {
+  background: var(--bg-cream);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.spec-box span {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--timber-500);
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.spec-box strong {
+  font-size: 0.94rem;
+  color: var(--timber-900);
+}
+
+.species-quote {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--timber-700);
+  border-left: 3px solid var(--honey-500);
+  padding-left: 18px;
+  margin-bottom: 24px;
+}
+
+/* --- Section: Featured Wooden Toy Catalog --- */
+.catalog-section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.catalog-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 40px 0 52px;
+}
+
+.filter-btn {
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  background: var(--surface-white);
+  border: 1px solid var(--border-med);
+  color: var(--timber-700);
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--honey-500);
+  color: var(--timber-900);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--timber-800);
+  color: var(--timber-50);
+  border-color: var(--timber-800);
+  box-shadow: var(--shadow-sm);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 36px;
+}
+
+/* Luxury Product Card */
+.product-card {
+  background: var(--surface-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-med);
+}
+
+.product-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f0e6da;
+}
+
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-gentle);
+}
+
+.product-card:hover .product-media img {
+  transform: scale(1.06);
+}
+
+/* Card Top Badges */
+.card-badges {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 3;
+}
+
+.card-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  color: var(--timber-900);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card-badge.gold {
+  background: var(--honey-400);
+  color: #fff;
+}
+
+.card-actions-overlay {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+
+.card-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--timber-800);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.card-icon-btn:hover {
+  background: var(--timber-900);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.card-icon-btn.active {
+  color: var(--terracotta);
+}
+
+.quickview-btn-wrap {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 3;
+  transform: translateY(120%);
+  transition: transform var(--transition-normal);
+}
+
+.product-card:hover .quickview-btn-wrap {
+  transform: translateY(0);
+}
+
+.btn-quickview {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  color: var(--timber-900);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+}
+
+.btn-quickview:hover {
+  background: var(--timber-900);
+  color: #fff;
+}
+
+.product-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: var(--timber-500);
+}
+
+.product-wood-tag {
+  font-weight: 600;
+  color: var(--honey-600);
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--honey-500);
+  font-weight: 700;
+}
+
+.product-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--timber-900);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.product-sub {
+  font-size: 0.88rem;
+  color: var(--timber-600);
+  margin-bottom: 18px;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+}
+
+.price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price-current {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--timber-900);
+}
+
+.price-original {
+  font-size: 0.95rem;
+  text-decoration: line-through;
+  color: var(--timber-400);
+}
+
+.btn-add-cart {
+  background: var(--timber-800);
+  color: var(--timber-50);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.btn-add-cart:hover {
+  background: var(--timber-900);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 27, 16, 0.2);
+}
+
+/* --- Section: Interactive Wooden Toy Engraving Studio --- */
+.customizer-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-sand) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.customizer-box {
+  background: var(--surface-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-med);
+  box-shadow: var(--shadow-xl);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+/* Left Canvas / Interactive Toy Simulation */
+.customizer-preview-pane {
+  background: radial-gradient(circle at center, #eedac5, #cfb194);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 480px;
+}
+
+.toy-display-stage {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(45, 27, 16, 0.25);
+  overflow: hidden;
+  background: #fff;
+  transition: all var(--transition-normal);
+}
+
+.toy-display-stage img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: filter 0.4s ease;
+}
+
+/* Realistic Laser Engraving Pyrography Overlay */
+.engraving-plate {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(45, 27, 16, 0.12);
+  backdrop-filter: blur(4px);
+  border: 1px dashed rgba(60, 36, 18, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 8px 24px;
+  pointer-events: none;
+  min-width: 220px;
+  text-align: center;
+}
+
+.engraved-text-render {
+  font-family: var(--font-engrave);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #2b170a;
+  text-shadow: 
+    1px 1px 0px rgba(255, 255, 255, 0.35),
+    -1px -1px 1px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.engraved-date-render {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #4a2810;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
+}
+
+/* Right Controls Pane */
+.customizer-controls-pane {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.customizer-step {
+  margin-bottom: 28px;
+}
+
+.customizer-step label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--timber-900);
+  margin-bottom: 10px;
+}
+
+.customizer-step label span {
+  color: var(--honey-600);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+/* Toy selector buttons */
+.custom-model-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.model-pill {
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-med);
+  background: var(--bg-cream);
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--timber-800);
+  transition: all var(--transition-fast);
+}
+
+.model-pill:hover, .model-pill.active {
+  background: var(--timber-800);
+  color: var(--timber-50);
+  border-color: var(--timber-800);
+}
+
+/* Timber Finish Swatches */
+.wood-swatches {
+  display: flex;
+  gap: 14px;
+}
+
+.wood-swatch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-med);
+  background: var(--bg-cream);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--timber-800);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.wood-swatch.active {
+  border-color: var(--honey-500);
+  background: var(--surface-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.swatch-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Engraving Input Fields */
+.engraving-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-wood {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-med);
+  background: var(--bg-cream);
+  font-family: inherit;
+  font-size: 0.98rem;
+  color: var(--timber-900);
+  transition: border-color var(--transition-fast);
+}
+
+.input-wood:focus {
+  outline: none;
+  border-color: var(--honey-500);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(194, 111, 28, 0.12);
+}
+
+.font-style-pills {
+  display: flex;
+  gap: 10px;
+}
+
+.font-pill {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-cream);
+  font-size: 0.86rem;
+  color: var(--timber-800);
+  transition: all var(--transition-fast);
+}
+
+.font-pill.active {
+  background: var(--timber-800);
+  color: var(--timber-50);
+  border-color: var(--timber-800);
+}
+
+/* Customizer summary & action */
+.customizer-checkout-box {
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-price {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--timber-900);
+}
+
+.custom-free-engrave {
+  font-size: 0.78rem;
+  color: var(--forest-600);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* --- Section: The Master Woodcarver's Workshop Story --- */
+.workshop-section {
+  padding: 110px 0;
+  background: var(--timber-900);
+  color: var(--timber-100);
+  position: relative;
+  overflow: hidden;
+}
+
+.workshop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.workshop-photo-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.workshop-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.workshop-photo-card:hover img {
+  transform: scale(1.03);
+}
+
+.workshop-content h2 {
+  color: #fff;
+}
+
+.workshop-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 36px 0;
+}
+
+.craft-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.craft-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(217, 130, 43, 0.15);
+  border: 1px solid var(--honey-400);
+  color: var(--honey-400);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.craft-step-info h4 {
+  color: #fff;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.craft-step-info p {
+  color: var(--timber-200);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* --- Section: Hardwood vs Plastic Comparison Matrix --- */
+.comparison-section {
+  padding: 100px 0;
+  background: var(--bg-cream);
+}
+
+.comparison-table-wrap {
+  background: var(--surface-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.comparison-table th {
+  background: var(--surface-warm);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.comparison-table th.col-timber {
+  background: rgba(194, 111, 28, 0.08);
+  color: var(--timber-900);
+  border-bottom: 2px solid var(--honey-500);
+}
+
+.comparison-table td.col-timber {
+  background: rgba(194, 111, 28, 0.03);
+  font-weight: 600;
+  color: var(--timber-900);
+}
+
+.comparison-table td.col-plastic {
+  color: var(--timber-500);
+}
+
+/* --- Section: Montessori Learning & Development Stages --- */
+.montessori-section {
+  padding: 100px 0;
+  background: var(--surface-warm);
+}
+
+.stage-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.stage-card {
+  background: var(--surface-white);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--honey-500);
+}
+
+.stage-age-pill {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(70, 118, 87, 0.1);
+  color: var(--forest-600);
+  font-weight: 700;
+  font-size: 0.84rem;
+  margin-bottom: 20px;
+}
+
+.stage-card h3 {
+  font-size: 1.45rem;
+  margin-bottom: 12px;
+}
+
+.stage-card p {
+  color: var(--timber-600);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.stage-highlights {
+  list-style: none;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+.stage-highlights li {
+  font-size: 0.88rem;
+  color: var(--timber-700);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* --- Section: Testimonials & Heirloom Stories --- */
+.reviews-section {
+  padding: 100px 0;
+  background: var(--bg-cream);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.review-card {
+  background: var(--surface-white);
+  border-radius: var(--radius-lg);
+  padding: 36px 30px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.review-stars {
+  color: #eab308;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.review-quote {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--timber-800);
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.reviewer-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 18px;
+}
+
+.reviewer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--timber-100);
+  color: var(--timber-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.reviewer-info h5 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--timber-900);
+}
+
+.reviewer-info p {
+  font-size: 0.8rem;
+  color: var(--timber-500);
+}
+
+/* --- Section: Sustainability & Tree Planting Mission --- */
+.eco-banner {
+  background: linear-gradient(135deg, var(--forest-800), #16241b);
+  color: #fff;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.eco-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.eco-content h2 {
+  color: #fff;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  margin-bottom: 18px;
+}
+
+.eco-content p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.tree-counter-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.tree-count {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #6ee7b7;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.tree-label {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* --- Footer --- */
+.site-footer {
+  background: var(--timber-900);
+  color: var(--timber-100);
+  padding: 90px 0 36px;
+  border-top: 1px solid var(--border-light);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+.footer-brand p {
+  color: var(--timber-300);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 18px 0 24px;
+  max-width: 320px;
+}
+
+.footer-col h4 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  margin-bottom: 12px;
+}
+
+.footer-col a {
+  color: var(--timber-200);
+  font-size: 0.92rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-col a:hover {
+  color: var(--honey-400);
+  padding-left: 4px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  color: var(--timber-400);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* --- Slide-Over Cart Drawer --- */
+.cart-drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(28, 16, 8, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.cart-drawer-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 460px;
+  height: 100%;
+  background: var(--bg-cream);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.cart-drawer-backdrop.active .cart-drawer {
+  transform: translateX(0);
+}
+
+.cart-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-header h3 {
+  font-size: 1.35rem;
+  color: var(--timber-900);
+}
+
+.cart-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--timber-800);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+}
+
+.cart-close-btn:hover {
+  background: var(--timber-800);
+  color: #fff;
+}
+
+/* Shipping progress */
+.cart-shipping-bar {
+  background: var(--surface-warm);
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.shipping-text {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--timber-800);
+  margin-bottom: 6px;
+}
+
+.shipping-track {
+  width: 100%;
+  height: 6px;
+  background: var(--timber-100);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.shipping-fill {
+  height: 100%;
+  background: var(--forest-600);
+  width: 75%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.cart-items-list {
+  padding: 20px 24px;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cart-item-card {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.cart-item-img {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  flex-grow: 1;
+}
+
+.cart-item-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--timber-900);
+  margin-bottom: 4px;
+}
+
+.cart-item-wood {
+  font-size: 0.78rem;
+  color: var(--honey-600);
+  margin-bottom: 8px;
+}
+
+.cart-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius-full);
+  background: #fff;
+}
+
+.qty-btn {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--timber-800);
+}
+
+.qty-val {
+  padding: 0 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.cart-item-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--timber-900);
+}
+
+.cart-footer {
+  padding: 24px;
+  border-top: 1px solid var(--border-light);
+  background: var(--surface-warm);
+}
+
+.cart-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 1.15rem;
+}
+
+.cart-total-price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--timber-900);
+}
+
+.btn-checkout {
+  width: 100%;
+  background: var(--timber-800);
+  color: var(--timber-50);
+  padding: 16px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+}
+
+.btn-checkout:hover {
+  background: var(--timber-900);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --- Quick View Modal --- */
+.quickview-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(28, 16, 8, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.quickview-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quickview-modal {
+  background: var(--surface-white);
+  border-radius: var(--radius-xl);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  transform: scale(0.95);
+  transition: transform var(--transition-normal);
+}
+
+.quickview-modal-backdrop.active .quickview-modal {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-cream);
+  color: var(--timber-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--timber-800);
+  color: #fff;
+}
+
+.modal-media {
+  background: #f1e4d6;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-media img {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  max-height: 380px;
+  object-fit: cover;
+}
+
+.modal-details {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toast Notification */
+.toast-notice {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--timber-900);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-xl);
+  z-index: 2000;
+  transform: translateY(120%);
+  transition: transform var(--transition-normal);
+}
+
+.toast-notice.show {
+  transform: translateY(0);
+}
+
+.toast-icon {
+  color: #4ade80;
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 1024px) {
+  .hero-grid,
+  .workshop-grid,
+  .customizer-box,
+  .species-display-card,
+  .eco-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .stage-cards-grid,
+  .reviews-grid,
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .quickview-modal {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none; /* Mobile menu can be toggled */
+  }
+  .hero-guarantees {
+    grid-template-columns: 1fr;
+  }
+  .stage-cards-grid,
+  .reviews-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+  .badge-top-left, .badge-bottom-right {
+    position: static;
+    margin-top: 12px;
+  }
+}

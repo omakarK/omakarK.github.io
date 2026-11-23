@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oak & Whimsy — 100% Handcrafted Wooden Toys & Heirlooms</title>
+  <meta name="description" content="Pure sustainable wooden toys carved with devotion. Zero plastics, non-toxic organic beeswax finishes, and generational durability.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a4f31'><path d='M12 2L2 22h20L12 2zm0 3.5L18.5 20H5.5L12 5.5z'/></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar">
+    <div class="container announcement-content">
+      <div class="announcement-marquee">
+        <span>🌿 100% FSC® Certified Appalachian & European Hardwood</span>
+        <span>•</span>
+        <span>Zero Plastics Ever</span>
+        <span>•</span>
+        <span>Free Laser Engraving on All Heirloom Sets</span>
+      </div>
+      <div class="announcement-controls">
+        <button id="audio-toggle-btn" class="audio-toggle-btn" title="Toggle Organic Acoustic Sounds">
+          <span class="audio-pulse"></span>
+          <span id="audio-status-label">Wood Audio: ON</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky Luxury Header -->
+  <header class="site-header">
+    <div class="container navbar">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" onclick="if(window.woodAudio) window.woodAudio.playWoodClick();">
+        <div class="logo-symbol">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Oak &amp; Whimsy</span>
+          <span class="logo-tagline">Artisan Wooden Heirlooms</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#catalog" class="nav-link active">Collections</a></li>
+          <li><a href="#species-explorer" class="nav-link">Our Hardwoods</a></li>
+          <li><a href="#customizer" class="nav-link">Engraving Studio</a></li>
+          <li><a href="#workshop" class="nav-link">Artisan Craft</a></li>
+          <li><a href="#montessori" class="nav-link">Montessori Play</a></li>
+          <li><a href="#reviews" class="nav-link">Testimonials</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="nav-actions">
+        <!-- Wishlist Button -->
+        <button class="action-btn" title="Heirloom Wishlist" onclick="showToast('Your Saved Heirloom Wishlist has ' + WISHLIST.size + ' favorites.'); if(window.woodAudio) window.woodAudio.playWoodClick();">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="action-badge wishlist-count-badge">1</span>
+        </button>
+
+        <!-- Cart Drawer Trigger -->
+        <button id="cart-drawer-trigger" class="action-btn" title="View Basket">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="action-badge cart-count-badge">1</span>
+        </button>
+
+        <a href="#catalog" class="btn-header-cta" onclick="if(window.woodAudio) window.woodAudio.playWoodClick();">
+          Shop Heirlooms
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <div class="hero-subhead">
+          <span>🪵</span>
+          <span>100% Solid Hardwood • Zero Plastics Ever</span>
+        </div>
+
+        <h1 class="hero-title">
+          Toys Carved from Nature, Built to Last <span class="highlight-italic">Generations.</span>
+        </h1>
+
+        <p class="hero-desc">
+          In a world overflowing with disposable plastic and flashing screens, we return to the quiet dignity of solid Appalachian oak, aromatic walnut, and satin maple. Handcrafted by master woodworkers, buffed with organic beeswax, and safe for tender hands.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#catalog" class="btn-primary" onclick="if(window.woodAudio) window.woodAudio.playWoodClick();">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Explore Heirloom Collection
+          </a>
+          <a href="#customizer" class="btn-secondary" onclick="if(window.woodAudio) window.woodAudio.playWoodClick();">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            Personalize with Engraving
+          </a>
+        </div>
+
+        <!-- Hero Pillars -->
+        <div class="hero-guarantees">
+          <div class="guarantee-item">
+            <div class="guarantee-icon">🌿</div>
+            <div class="guarantee-text">
+              <h4>Pure Sustainably Sourced</h4>
+              <p>FSC® Certified North American Timber</p>
+            </div>
+          </div>
+          <div class="guarantee-item">
+            <div class="guarantee-icon">🛡️</div>
+            <div class="guarantee-text">
+              <h4>100% Non-Toxic Finishes</h4>
+              <p>Natural Beeswax & Organic Oils</p>
+            </div>
+          </div>
+          <div class="guarantee-item">
+            <div class="guarantee-icon">⏳</div>
+            <div class="guarantee-text">
+              <h4>Lifetime Craft Guarantee</h4>
+              <p>Passed down across generations</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Showcase Image Card -->
+      <div class="hero-visual">
+        <div class="hero-main-card">
+          <div class="hero-image-wrap">
+            <img src="assets/images/hero-wooden-toys.jpg" alt="Artisan Wooden Toys Showcase" id="hero-main-img">
+          </div>
+        </div>
+
+        <!-- Floating Badges -->
+        <div class="floating-badge badge-top-left">
+          <div class="badge-round-icon forest">✓</div>
+          <div class="badge-details">
+            <h5>Certified Child-Safe</h5>
+            <p>ASTM-F963 &amp; EN-71 Standards</p>
+          </div>
+        </div>
+
+        <div class="floating-badge badge-bottom-right">
+          <div class="badge-round-icon">★</div>
+          <div class="badge-details">
+            <h5>4.98 / 5.0 Rating</h5>
+            <p>Over 14,000 heirloom deliveries</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Counter Banner -->
+  <section class="stats-banner">
+    <div class="container stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" data-target="52000" data-suffix="+">0</div>
+        <div class="stat-label">Happy Childhoods Sparked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="100" data-suffix="%">0</div>
+        <div class="stat-label">Solid Hardwood (Zero Plastic)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="142850" data-suffix="+">0</div>
+        <div class="stat-label">Native Trees Replanted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="100" data-prefix="Age " data-suffix="+">0</div>
+        <div class="stat-label">Heirloom Durability Years</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wood Species Explorer Section -->
+  <section id="species-explorer" class="woods-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge">
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+          </svg>
+          Tactile Material Heritage
+        </span>
+        <h2 class="section-title">The Noble Hardwoods We Carve</h2>
+        <p class="section-desc">
+          Every tree holds its own personality, warmth, and grain pattern. We select only premium, kiln-dried hardwoods with dense pores that never splinter.
+        </p>
+      </div>
+
+      <!-- Wood Species Filter Tabs -->
+      <div class="species-selector">
+        <button class="species-tab active" data-wood="oak">
+          <span class="species-dot" style="background: #D8AB6F;"></span>
+          American White Oak
+        </button>
+        <button class="species-tab" data-wood="walnut">
+          <span class="species-dot" style="background: #523420;"></span>
+          Black Walnut
+        </button>
+        <button class="species-tab" data-wood="maple">
+          <span class="species-dot" style="background: #EED9B3;"></span>
+          Hard Rock Maple
+        </button>
+        <button class="species-tab" data-wood="beech">
+          <span class="species-dot" style="background: #E3C193;"></span>
+          European Mountain Beech
+        </button>
+      </div>
+
+      <!-- Active Species Display Card -->
+      <div id="species-card-content" class="species-display-card">
+        <div class="species-visual" style="background: linear-gradient(135deg, #d8ab6f, #523420);">
+          <div class="wood-texture-overlay"></div>
+          <div class="species-visual-content">
+            <h3>American White Oak</h3>
+            <p>Quercus alba</p>
+          </div>
+        </div>
+
+        <div class="species-details">
+          <span class="section-badge">100% FSC® Certified Fallen &amp; Managed Harvest</span>
+          <h4>American White Oak</h4>
+          <p class="species-botanical">Origin: Appalachian Sustainable Certified Forests</p>
+          
+          <p class="species-quote">"Oak has guarded ships and castles for millennia. In a child’s toy, it withstands decades of active play without splintering."</p>
+
+          <div class="species-specs-list">
+            <div class="spec-box">
+              <span>Janka Hardness</span>
+              <strong>1,360 lbf (Exceptional Durability)</strong>
+            </div>
+            <div class="spec-box">
+              <span>Grain Pattern</span>
+              <strong>Prominent, warm golden rays with deep tactile rings</strong>
+            </div>
+            <div class="spec-box">
+              <span>Natural Aroma</span>
+              <strong>Warm, rich earthy woodland bouquet</strong>
+            </div>
+            <div class="spec-box">
+              <span>Ideal Masterpiece</span>
+              <strong>Heirloom Rocking Horses &amp; Furniture</strong>
+            </div>
+          </div>
+
+          <button class="btn-secondary" onclick="scrollToCatalog('oak')">
+            Explore Oak Toys
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Wooden Toy Catalog -->
+  <section id="catalog" class="catalog-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge">Hand-Carved Masterpieces</span>
+        <h2 class="section-title">The Heirloom Wooden Toy Collection</h2>
+        <p class="section-desc">
+          Smooth to the touch, warm to the soul. Each wooden toy is individually shaped, balanced, and finished by master artisans.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="catalog-filter-bar">
+        <button class="filter-btn active" data-filter="all">All Masterpieces</button>
+        <button class="filter-btn" data-filter="heirloom">Heirloom Nursery</button>
+        <button class="filter-btn" data-filter="vehicles">Vehicles &amp; Locomotives</button>
+        <button class="filter-btn" data-filter="montessori">Montessori &amp; Sensory</button>
+        <button class="filter-btn" data-filter="puzzles">Puzzles &amp; Playsets</button>
+        <button class="filter-btn" data-filter="musical">Musical Woodcraft</button>
+      </div>
+
+      <!-- Dynamic Products Grid -->
+      <div id="products-container" class="products-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Wooden Toy Engraving Studio -->
+  <section id="customizer" class="customizer-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge">Artisan Laser &amp; Pyrography Workshop</span>
+        <h2 class="section-title">Personalized Heirloom Engraver</h2>
+        <p class="section-desc">
+          Create an unforgettable gift. Personalize your wooden toy with your child’s name and birth year, burned into the natural grain by our precision laser studio.
+        </p>
+      </div>
+
+      <div class="customizer-box">
+        <!-- Left Interactive Simulation -->
+        <div class="customizer-preview-pane">
+          <div class="toy-display-stage">
+            <img src="assets/images/toy-vintage-car.jpg" id="customizer-toy-image" alt="Customizer Toy Preview">
+            <div class="engraving-plate">
+              <div id="custom-engraved-text" class="engraved-text-render">OLIVER</div>
+              <div id="custom-engraved-date" class="engraved-date-render">EST. 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Controls -->
+        <div class="customizer-controls-pane">
+          <!-- Step 1: Select Toy Model -->
+          <div class="customizer-step">
+            <label>1. Select Wooden Toy <span>(Heirloom Selection)</span></label>
+            <div class="custom-model-pills">
+              <button class="model-pill active" data-model="toy-vintage-car">Classic Roadster</button>
+              <button class="model-pill" data-model="toy-rocking-horse">Rocking Horse</button>
+              <button class="model-pill" data-model="toy-train">Alpine Express</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Select Wood Species Finish -->
+          <div class="customizer-step">
+            <label>2. Choose Wood Finish <span>(Natural Satin Tones)</span></label>
+            <div class="wood-swatches">
+              <div class="wood-swatch active" data-tone="beech" data-finish-name="Golden Honey Beech">
+                <span class="swatch-color" style="background: #E3C193;"></span>
+                Honey Beech
+              </div>
+              <div class="wood-swatch" data-tone="cherry" data-finish-name="Rich American Cherry">
+                <span class="swatch-color" style="background: #BD6A3E;"></span>
+                Warm Cherry
+              </div>
+              <div class="wood-swatch" data-tone="walnut" data-finish-name="Smoked Black Walnut">
+                <span class="swatch-color" style="background: #523420;"></span>
+                Black Walnut
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Engraving Text -->
+          <div class="customizer-step">
+            <label>3. Inscribe Child's Name &amp; Year <span>(Free Pyrography)</span></label>
+            <div class="engraving-inputs">
+              <input type="text" id="engrave-name-input" class="input-wood" maxlength="16" placeholder="Enter Child's Name (e.g. OLIVER)" value="OLIVER">
+              <input type="text" id="engrave-date-input" class="input-wood" maxlength="14" placeholder="Year or Message (e.g. EST. 2026)" value="EST. 2026">
+            </div>
+          </div>
+
+          <!-- Step 4: Font Style -->
+          <div class="customizer-step">
+            <label>4. Engraving Letterform</label>
+            <div class="font-style-pills">
+              <button class="font-pill active" data-font="serif">Classic Serif</button>
+              <button class="font-pill" data-font="script">Artisan Script</button>
+            </div>
+          </div>
+
+          <!-- Checkout Box -->
+          <div class="customizer-checkout-box">
+            <div>
+              <div class="custom-price" id="customizer-live-price">$76.00</div>
+              <div class="custom-free-engrave">✓ Complimentary Laser Engraving Included</div>
+            </div>
+            <button id="btn-add-custom-toy" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              Add Custom Toy to Basket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Master Woodcarver's Workshop Section -->
+  <section id="workshop" class="workshop-section">
+    <div class="container workshop-grid">
+      <!-- Left Photo -->
+      <div class="workshop-photo-card">
+        <img src="assets/images/artisan-workshop.jpg" alt="Master Woodworker Handcrafting Wooden Toy" loading="lazy">
+      </div>
+
+      <!-- Right Steps -->
+      <div class="workshop-content">
+        <span class="section-badge" style="background: rgba(217, 130, 43, 0.15); color: var(--honey-400); border-color: rgba(217, 130, 43, 0.3);">
+          The Art of Slow Living
+        </span>
+        <h2 class="section-title">Crafted with Quiet Hands and Deep Intention</h2>
+        <p style="color: var(--timber-200); font-size: 1.05rem; line-height: 1.7;">
+          In our quiet alpine workshop, there are no conveyor belts or synthetic molding dies. Each toy is born from sustainably sourced timber that rested for a full season before meeting the woodcarver’s gouge.
+        </p>
+
+        <div class="workshop-steps">
+          <div class="craft-step">
+            <div class="craft-step-num">1</div>
+            <div class="craft-step-info">
+              <h4>Ethical Timber Foraging</h4>
+              <p>We hand-select mature, fallen, and responsibly harvested native hardwood logs from sustainably certified forests.</p>
+            </div>
+          </div>
+
+          <div class="craft-step">
+            <div class="craft-step-num">2</div>
+            <div class="craft-step-info">
+              <h4>Zero-Nail Japanese &amp; Mortise Joinery</h4>
+              <p>Our toys rely exclusively on interlocking wooden dowels and traditional mortise-and-tenon joints—no metal nails to loosen or rust.</p>
+            </div>
+          </div>
+
+          <div class="craft-step">
+            <div class="craft-step-num">3</div>
+            <div class="craft-step-info">
+              <h4>Seven-Stage Velvet Hand Sanding</h4>
+              <p>Each curve is rubbed down by hand through seven grits up to 600-grit silkiness. Every edge is radiused so small mouths and hands are perfectly safe.</p>
+            </div>
+          </div>
+
+          <div class="craft-step">
+            <div class="craft-step-num">4</div>
+            <div class="craft-step-info">
+              <h4>Organic Beeswax &amp; Jojoba Impregnation</h4>
+              <p>Buffed with natural beeswax and cold-pressed organic jojoba oil. 100% edible, antimicrobial, and naturally water-resistant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hardwood vs Plastic Comparison -->
+  <section class="comparison-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge">Why Wood Matters</span>
+        <h2 class="section-title">Heirloom Timber vs. Disposable Plastic</h2>
+        <p class="section-desc">
+          Plastic toys break in weeks and linger in landfills for centuries. Wooden toys endure for generations, growing more beautiful with every year of love.
+        </p>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Toy Characteristic</th>
+              <th class="col-timber">🪵 Oak &amp; Whimsy Wooden Toys</th>
+              <th>Plastic Mass-Market Toys</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lifespan &amp; Durability</strong></td>
+              <td class="col-timber">50 to 100+ Years (Heirloom Grade)</td>
+              <td class="col-plastic">3 to 18 Months (Prone to cracking)</td>
+            </tr>
+            <tr>
+              <td><strong>Chemical &amp; Toxin Safety</strong></td>
+              <td class="col-timber">100% Non-Toxic Organic Beeswax &amp; Jojoba</td>
+              <td class="col-plastic">Phthalates, microplastics &amp; petroleum resins</td>
+            </tr>
+            <tr>
+              <td><strong>Sensory &amp; Brain Stimulation</strong></td>
+              <td class="col-timber">Warm natural weight, tactile grain, soothing acoustics</td>
+              <td class="col-plastic">Cold synthetic touch, noisy shrill electronic chips</td>
+            </tr>
+            <tr>
+              <td><strong>Environmental Impact</strong></td>
+              <td class="col-timber">Carbon-Negative (5 Native Trees Planted Per Toy)</td>
+              <td class="col-plastic">500+ years in landfills shedding microplastics</td>
+            </tr>
+            <tr>
+              <td><strong>Imaginative Open Play</strong></td>
+              <td class="col-timber">Encourages creative storytelling and open exploration</td>
+              <td class="col-plastic">Prescribed, button-mashing passive entertainment</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Montessori Learning & Development Stages -->
+  <section id="montessori" class="montessori-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge">Developmental Psychology</span>
+        <h2 class="section-title">Designed for Curious Developing Minds</h2>
+        <p class="section-desc">
+          Wooden toys provide natural physical feedback: real mass, authentic friction, and genuine balance that teach spatial mechanics intuitively.
+        </p>
+      </div>
+
+      <div class="stage-cards-grid">
+        <div class="stage-card">
+          <span class="stage-age-pill">Ages 0 - 12 Months</span>
+          <h3>Sensory Discovery &amp; Teething</h3>
+          <p>Gentle tactile curves, organic vegetable-dyed grasping beads, and antimicrobial maple teething rings that soothe aching gums safely.</p>
+          <ul class="stage-highlights">
+            <li>✓ Natural antibacterial properties of solid maple</li>
+            <li>✓ Soothing tactile warmth against infant palms</li>
+            <li>✓ Safe to mouth and explore without microplastics</li>
+          </ul>
+        </div>
+
+        <div class="stage-card">
+          <span class="stage-age-pill">Ages 1 - 3 Years</span>
+          <h3>Dexterity, Walking &amp; Stacking</h3>
+          <p>Weighted pull-along animal companions and nesting rainbow arches that develop gross motor balance, pincer grasp, and hand-eye coordination.</p>
+          <ul class="stage-highlights">
+            <li>✓ Calibrated resistance builds walking confidence</li>
+            <li>✓ Fosters spatial relationships and nested sizing</li>
+            <li>✓ Whisper-quiet wooden wheels on wood floors</li>
+          </ul>
+        </div>
+
+        <div class="stage-card">
+          <span class="stage-age-pill">Ages 3 - 8 Years</span>
+          <h3>Architectural Play &amp; Narrative</h3>
+          <p>Kinetic marble chutes, articulated timber trains, and modular manors that ignite divergent STEM problem-solving and boundless fantasy.</p>
+          <ul class="stage-highlights">
+            <li>✓ Open-ended play with zero pre-programmed rules</li>
+            <li>✓ Teaches real physics, gravity, and kinetic momentum</li>
+            <li>✓ Collaborative, screen-free sibling engagement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & Reviews -->
+  <section id="reviews" class="reviews-section">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-badge">Cherished Across Generations</span>
+        <h2 class="section-title">Stories from Loving Families</h2>
+        <p class="section-desc">
+          Hear from parents, grandparents, and Montessori educators whose homes have been enriched by our heirloom wooden toys.
+        </p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">
+            "The Heirloom Rocking Horse is the most exquisite piece of craftsmanship in our nursery. The oak grain is luminous, and the beeswax scent filled the room when we opened the box. My two-year-old daughter loves it dearly."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">EV</div>
+            <div class="reviewer-info">
+              <h5>Eleanor Vance</h5>
+              <p>Mother of two • Boston, MA</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">
+            "As a Montessori educator for over 18 years, I am meticulous about classroom materials. Oak &amp; Whimsy's arch rainbow and balancing stones have an incomparable velvet texture that grips properly without slipping."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">SJ</div>
+            <div class="reviewer-info">
+              <h5>Sarah Jenkins</h5>
+              <p>Lead Montessori Guide • Seattle, WA</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">
+            "I ordered the engraved roadster with my grandson's name and birth date. Seeing him roll it across the floor while knowing it will outlive me and be passed down to his children brought tears to my eyes. Worth every penny."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">GH</div>
+            <div class="reviewer-info">
+              <h5>George Harrison</h5>
+              <p>Grandfather • Austin, TX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainability & Tree Planting Mission Banner -->
+  <section class="eco-banner">
+    <div class="container eco-grid">
+      <div class="eco-content">
+        <span class="section-badge" style="background: rgba(110, 231, 183, 0.15); color: #6ee7b7; border-color: rgba(110, 231, 183, 0.3);">
+          Giving Back to the Forest
+        </span>
+        <h2>For Every Toy Handcrafted, We Plant 5 Native Hardwood Trees</h2>
+        <p>
+          We take only what nature offers, and give back tenfold. In partnership with Eden Reforestation Projects, every heirloom toy ordered finances the planting and lifelong protection of native white oak, walnut, and beech saplings.
+        </p>
+        <a href="#catalog" class="btn-primary" style="background: #fff; color: var(--forest-800);" onclick="if(window.woodAudio) window.woodAudio.playWoodClick();">
+          Choose Your Heirloom Toy
+        </a>
+      </div>
+
+      <div class="tree-counter-card">
+        <div class="tree-count" data-target="142850" data-suffix=" Trees">0</div>
+        <div class="tree-label">Planted across protected Appalachian &amp; Bavarian forest reserves</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom: 14px;">
+            <div class="logo-symbol">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </div>
+            <span class="logo-title" style="color: #fff;">Oak &amp; Whimsy</span>
+          </div>
+          <p>
+            Pure handcrafted wooden toys carved from certified sustainable hardwoods. Crafted to be cherished today, and passed down as heirlooms tomorrow.
+          </p>
+          <form id="newsletter-form" style="display: flex; gap: 8px; max-width: 340px;">
+            <input type="email" placeholder="Join Woodcraft Guild (Email)" required style="flex-grow: 1; padding: 10px 14px; border-radius: var(--radius-full); border: 1px solid var(--timber-700); background: var(--timber-800); color: #fff; font-size: 0.88rem;">
+            <button type="submit" class="btn-primary" style="padding: 10px 18px; font-size: 0.85rem;">Join</button>
+          </form>
+        </div>
+
+        <div class="footer-col">
+          <h4>Handcrafted Collections</h4>
+          <ul>
+            <li><a href="#catalog">Heirloom Nursery</a></li>
+            <li><a href="#catalog">Vehicles &amp; Locomotives</a></li>
+            <li><a href="#catalog">Montessori &amp; Sensory</a></li>
+            <li><a href="#catalog">Puzzles &amp; Architecture</a></li>
+            <li><a href="#catalog">Musical Tonewoods</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Artisan Heritage</h4>
+          <ul>
+            <li><a href="#species-explorer">Wood Species Guide</a></li>
+            <li><a href="#customizer">Custom Engraving Studio</a></li>
+            <li><a href="#workshop">The Woodworker's Story</a></li>
+            <li><a href="#montessori">Montessori Child Development</a></li>
+            <li><a href="#reviews">Heirloom Care &amp; Waxing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Guarantees &amp; Trust</h4>
+          <ul>
+            <li><a href="#">FSC® Certified Forestry</a></li>
+            <li><a href="#">ASTM-F963 &amp; CE Safety Tests</a></li>
+            <li><a href="#">Lifetime Craft Warranty</a></li>
+            <li><a href="#">Carbon-Neutral Global Delivery</a></li>
+            <li><a href="#">Contact Master Woodworkers</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Oak &amp; Whimsy Artisans Ltd. All Rights Reserved. Pure Woodcraft.</div>
+        <div style="display: flex; gap: 20px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Craftsmanship</a>
+          <a href="#">Forest Stewardship</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Over Shopping Basket Drawer -->
+  <div id="cart-drawer-backdrop" class="cart-drawer-backdrop">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Artisan Basket</h3>
+        <button id="cart-drawer-close" class="cart-close-btn" aria-label="Close Basket">✕</button>
+      </div>
+
+      <div class="cart-shipping-bar">
+        <div id="shipping-status-text" class="shipping-text">Add $56.00 more for Free Worldwide Heirloom Shipping!</div>
+        <div class="shipping-track">
+          <div id="shipping-progress-fill" class="shipping-fill"></div>
+        </div>
+      </div>
+
+      <div id="cart-items-container" class="cart-items-list">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-price" class="cart-total-price">$94.00</span>
+        </div>
+        <button id="btn-checkout-now" class="btn-checkout">
+          Proceed to Artisan Packaging
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal Backdrop -->
+  <div id="quickview-modal-backdrop" class="quickview-modal-backdrop" onclick="if(event.target === this) closeQuickView();">
+    <div id="quickview-modal-content" class="quickview-modal">
+      <!-- Populated dynamically by app.js -->
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
+
