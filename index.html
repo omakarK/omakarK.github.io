@@ -82,9 +82,44 @@
         <a href="#catalog" class="btn-header-cta" onclick="if(window.woodAudio) window.woodAudio.playWoodClick();">
           Shop Toys
         </a>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button id="mobile-menu-toggle" class="action-btn mobile-menu-btn" aria-label="Open Mobile Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-menu-backdrop" class="mobile-menu-backdrop">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <div class="logo-title" style="font-size: 1.25rem;">Oak &amp; Whimsy</div>
+        <button id="mobile-menu-close" class="cart-close-btn" aria-label="Close Menu">✕</button>
+      </div>
+      <ul class="mobile-menu-links">
+        <li><a href="#catalog" class="mobile-link" onclick="closeMobileMenu();">Collections</a></li>
+        <li><a href="#species-explorer" class="mobile-link" onclick="closeMobileMenu();">Indian Hardwoods</a></li>
+        <li><a href="#customizer" class="mobile-link" onclick="closeMobileMenu();">Laser Engraving Studio</a></li>
+        <li><a href="#founders" class="mobile-link" onclick="closeMobileMenu();">Our Founders (Swapnil &amp; Bhavya)</a></li>
+        <li><a href="#workshop" class="mobile-link" onclick="closeMobileMenu();">Kolhapur Workshop</a></li>
+        <li><a href="#reviews" class="mobile-link" onclick="closeMobileMenu();">Customer Reviews</a></li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <div style="font-size: 0.85rem; color: var(--timber-700); margin-bottom: 12px;">
+          📍 Jarag Nagar, Kolhapur, Maharashtra
+        </div>
+        <a href="#catalog" class="btn-primary" style="width: 100%; justify-content: center;" onclick="closeMobileMenu();">
+          Shop Kolhapuri Toys
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero-section">

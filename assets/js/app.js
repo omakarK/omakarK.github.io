@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartUI();
   updateWishlistBadges();
   initNewsletter();
+  initMobileMenu();
 });
 
 // Helper for Indian Rupee Currency Formatting
@@ -660,4 +661,45 @@ function showToast(message) {
   window.toastTimer = setTimeout(() => {
     toast.classList.remove('show');
   }, 3200);
+}
+
+/* --- 9. Dynamic Mobile Menu Drawer --- */
+function initMobileMenu() {
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      openMobileMenu();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) {
+        closeMobileMenu();
+      }
+    });
+  }
+}
+
+function openMobileMenu() {
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  if (backdrop) backdrop.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  if (window.woodAudio) window.woodAudio.playWoodClick(1.2);
+}
+
+function closeMobileMenu() {
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  if (backdrop) backdrop.classList.remove('active');
+  document.body.style.overflow = '';
+  if (window.woodAudio) window.woodAudio.playWoodClick(0.9);
 }
