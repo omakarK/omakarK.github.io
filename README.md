@@ -16,36 +16,50 @@ An animated, luxury e-commerce website for an exclusive wooden toy workshop foun
 
 ---
 
-## 🚀 How to Host on GitHub Pages (github.io)
+## Shop workflows
 
-### Step 1: Create a New GitHub Repository
-1. Go to [github.com/new](https://github.com/new).
-2. Name your repository (e.g. `wooden-toys` or `kolhapur-wooden-toys`).
-3. Set it to **Public**.
-4. Leave "Add a README file" unchecked.
-5. Click **Create repository**.
+| Area | Workflow |
+| --- | --- |
+| Storefront | Browse categories, save a wishlist, personalize eligible toys, and add products or discounted combos to the basket. |
+| Checkout | Enter an Indian delivery address, review stock and the final INR total, and place a cash-on-delivery order. Shipping is free from ₹1,499. |
+| Admin catalog | Add, edit, unpublish, or delete products. Manage category names and sort order. |
+| Admin offers | Edit the offers section heading and introduction. Publish and price combos, choose included quantities, and upload or remove photos and videos. |
+| Admin orders | Review delivery and engraving details, filter by status, and update fulfilment or tracking. Cancelling an unshipped order returns its stock. |
+| Admin traffic | See visits, distinct browsers, recent activity, and daily and per-section counts. |
 
-### Step 2: Push Your Local Code to GitHub
-Open your terminal in this directory (`d:\Python_Projects\LayoutDemo`) and run:
-```bash
-git remote add origin https://github.com/<YOUR-USERNAME>/<YOUR-REPO-NAME>.git
-git branch -M main
-git push -u origin main
+The storefront and admin use React. NestJS serves the API and built frontend. MySQL stores catalog, inventory, offers and media, orders, admin sessions, newsletter signups, and anonymous traffic. Checkout calculates prices on the server and reserves stock in the same transaction that saves the order. Order line snapshots preserve the purchased product names, prices, and options after catalog edits.
+
+## Run locally
+
+Use Node.js 22.12 or newer and MySQL 8.0.16 or newer. Create a database and a dedicated local MySQL account. Run this in MySQL as a database administrator, replacing the example password with a generated password.
+
+```sql
+CREATE DATABASE oak_whimsy CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE USER 'oak_shop'@'127.0.0.1' IDENTIFIED BY 'replace-with-generated-password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, REFERENCES, INDEX
+  ON oak_whimsy.* TO 'oak_shop'@'127.0.0.1';
 ```
 
-### Step 3: Enable GitHub Pages
-1. Go to your repository on GitHub.
-2. Click **Settings** (top right tab).
-3. In the left sidebar, click **Pages**.
-4. Under **Build and deployment &rarr; Branch**, select **main** and folder **/(root)**, then click **Save**.
-5. Within 1 to 2 minutes, your website will be live at:
-   `https://<YOUR-USERNAME>.github.io/<YOUR-REPO-NAME>/`
+Copy `.env.example` to `.env` and set `DATABASE_URL`. Percent-encode any URL-reserved characters in the database password. Then run from the repository root.
 
----
-
-## 🛠️ Local Development
-To test locally:
-```bash
-python -m http.server 3000
+```powershell
+npm ci
+npm run build
+npm run db:setup
+$shopPassword = Read-Host 'Choose an admin password (at least 12 characters)' -AsSecureString
+[System.Net.NetworkCredential]::new('', $shopPassword).Password | npm run admin -- shopowner
+Remove-Variable shopPassword
+npm start
 ```
-Open `http://localhost:3000` in your browser.
+
+Open [the storefront](http://127.0.0.1:3000/) and [Shop Admin](http://127.0.0.1:3000/admin). Sign in with the account you created. The setup command seeds the existing demo catalog and a sample combo once. Running the admin command again for an existing username resets its password and revokes its sessions.
+
+For frontend development, keep the backend running and run `npm run dev` in a second terminal. Vite forwards API and media requests to the local backend.
+
+## Deploy behind Nginx
+
+The existing GitHub Pages hostname is recorded in `CNAME`. Serve the dynamic shop from a host running Node.js and Nginx with a reachable MySQL database. Use the included `deploy/nginx.conf` as an Nginx site configuration, point the domain to that host, and install a TLS certificate. Set `SHOP_ORIGIN` to the HTTPS origin and `SHOP_TRUST_PROXY=1`, then build, initialise the database, create an admin, and run `npm start` under the host’s process supervisor. Validate the Nginx configuration with `nginx -t` before reloading.
+
+The backend defaults to loopback. Admin operations require a MySQL-backed session, HTTP-only cookies, and a CSRF token for changes. Write requests validate their origin and input. NestJS limits API calls and sign-in attempts, and Nginx adds per-client API throttling. Keep the database and uploaded media backed up. If the database uses a reduced `max_allowed_packet`, configure at least 32 MB to accept 30 MB video uploads.
+
+Checkout records cash-on-delivery orders. Newsletter signup records the email address in MySQL. Customer receipts and newsletter delivery can be connected to a mail provider separately.

@@ -6,31 +6,22 @@
  */
 
 // Cart & Wishlist state
-let CART = [
-  {
-    id: 'toy-train',
-    name: 'Deccan Heritage Express Locomotive',
-    woodType: 'Seasoned Haldu & Sheesham',
-    price: 1899.00,
-    qty: 1,
-    image: 'assets/images/toy-train.jpg',
-    engraving: null
-  }
-];
-
-let WISHLIST = new Set(['toy-rocking-horse']);
+const CART = [];
+const savedWishlist = loadPreference('oak-wishlist', []);
+const WISHLIST = new Set(Array.isArray(savedWishlist) ? savedWishlist : []);
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderProductCatalog('all');
-  initCatalogFilters();
   initWoodSpeciesExplorer();
   initCustomizer();
   initCartDrawer();
+  initCheckout();
   initAudioToggle();
   updateCartUI();
   updateWishlistBadges();
   initNewsletter();
   initMobileMenu();
+  initTraffic();
+  loadShop();
 });
 
 // Helper for Indian Rupee Currency Formatting
@@ -46,104 +37,20 @@ function renderProductCatalog(filterCategory = 'all') {
   const container = document.getElementById('products-container');
   if (!container) return;
 
-  const filtered = filterCategory === 'all' 
-    ? WOODEN_PRODUCTS 
-    : WOODEN_PRODUCTS.filter(p => p.category === filterCategory);
+  const filtered = WOODEN_PRODUCTS.filter(product => {
+    if (filterCategory === 'all') return true;
+    if (filterCategory === 'wishlist') return WISHLIST.has(product.id);
+    return product.category === filterCategory;
+  });
 
-  container.innerHTML = filtered.map(product => {
-    const isWishlisted = WISHLIST.has(product.id);
-    return `
-      <article class="product-card" data-id="${product.id}">
-        <div class="product-media">
-          <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='assets/images/hero-wooden-toys.jpg'">
-          
-          <div class="card-badges">
-            <span class="card-badge gold">${product.badge}</span>
-            <span class="card-badge">${product.recommendedAge}</span>
-          </div>
-
-          <div class="card-actions-overlay">
-            <button class="card-icon-btn wishlist-btn ${isWishlisted ? 'active' : ''}" 
-                    aria-label="Add to Wishlist" 
-                    onclick="toggleWishlist('${product.id}', event)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="${isWishlisted ? '#c45b3a' : 'none'}" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-          </div>
-
-          <div class="quickview-btn-wrap">
-            <button class="btn-quickview" onclick="openQuickView('${product.id}', event)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              Quick Artisan View
-            </button>
-          </div>
-        </div>
-
-        <div class="product-info">
-          <div class="product-meta-row">
-            <span class="product-wood-tag">${product.woodType}</span>
-            <div class="product-rating">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              <span>${product.rating.toFixed(1)}</span>
-            </div>
-          </div>
-
-          <h3 class="product-name">${product.name}</h3>
-          <p class="product-sub">${product.subtitle}</p>
-
-          <div class="product-price-row">
-            <div class="price-wrap">
-              <span class="price-current">${formatINR(product.price)}</span>
-              <span class="price-original">${formatINR(product.originalPrice)}</span>
-            </div>
-            <button class="btn-add-cart" onclick="addToCart('${product.id}', event)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-              Add to Basket
-            </button>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
-
-  if (window.initCardTilt) {
-    window.initCardTilt();
-  }
-}
-
-function initCatalogFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const category = btn.getAttribute('data-filter');
-      
-      if (window.woodAudio) {
-        window.woodAudio.playWoodClick(1.2);
-      }
-
-      const container = document.getElementById('products-container');
-      container.style.opacity = '0.3';
-      container.style.transform = 'translateY(10px)';
-
-      setTimeout(() => {
-        renderProductCatalog(category);
-        container.style.transition = 'all 0.3s ease';
-        container.style.opacity = '1';
-        container.style.transform = 'translateY(0)';
-      }, 150);
-    });
+  window.shopUI.catalog({
+    products: filtered,
+    wishlist: WISHLIST,
+    emptyText: filterCategory === 'wishlist' ? 'Your wishlist is empty.' : 'There are no toys in this collection yet.',
+    onWishlist: toggleWishlist,
+    onPreview: openQuickView,
+    onAdd: addToCart,
+    onLayout: window.initCardTilt
   });
 }
 
@@ -227,43 +134,64 @@ function scrollToCatalog(woodType) {
 }
 
 /* --- 3. Live Wooden Toy Customizer / Engraver Studio --- */
-let customizerState = {
+const customizerState = {
   modelId: 'toy-vintage-car',
-  modelName: '1938 Kolhapur Royal Roadster',
-  price: 1399.00,
+  price: null,
   woodFinish: 'Natural CP Sagwan (Teak)',
   woodToneCss: 'sepia(0.2) saturate(1.1)',
   engravedName: 'AARAV',
   engravedDate: 'KOLHAPUR • 2026',
-  fontClass: 'font-fraunces',
+  fontClass: 'serif',
   image: 'assets/images/toy-vintage-car.jpg'
 };
 
+function renderCustomizerModels() {
+  const models = WOODEN_PRODUCTS.filter(product => product.engravable && product.inStock);
+  const selector = document.getElementById('customizer-models');
+  const selected = models.find(product => product.id === customizerState.modelId) || models[0];
+  selector.replaceChildren();
+  document.getElementById('btn-add-custom-toy').disabled = !selected;
+  if (!selected) {
+    selector.textContent = 'No engraving models are currently available.';
+    customizerState.price = null;
+    updateCustomizerPreview();
+    return;
+  }
+  for (const model of models) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'model-pill';
+    button.textContent = model.name;
+    button.dataset.model = model.id;
+    selector.append(button);
+  }
+  selectCustomizerModel(selected);
+}
+
+function selectCustomizerModel(product) {
+  customizerState.modelId = product.id;
+  customizerState.price = product.price;
+  customizerState.image = product.image;
+  for (const button of document.querySelectorAll('.model-pill')) {
+    const active = button.dataset.model === product.id;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  }
+  updateCustomizerPreview();
+}
+
 function initCustomizer() {
-  const modelPills = document.querySelectorAll('.model-pill');
   const swatches = document.querySelectorAll('.wood-swatch');
   const nameInput = document.getElementById('engrave-name-input');
   const dateInput = document.getElementById('engrave-date-input');
   const fontPills = document.querySelectorAll('.font-pill');
   const addCustomBtn = document.getElementById('btn-add-custom-toy');
 
-  // Model switch
-  modelPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      modelPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-
-      const modelId = pill.getAttribute('data-model');
-      const prod = WOODEN_PRODUCTS.find(p => p.id === modelId);
-      if (prod) {
-        customizerState.modelId = prod.id;
-        customizerState.modelName = prod.name;
-        customizerState.price = prod.price;
-        customizerState.image = prod.image;
-        updateCustomizerPreview();
-      }
-      if (window.woodAudio) window.woodAudio.playWoodClick(1.1);
-    });
+  document.getElementById('customizer-models').addEventListener('click', event => {
+    const product = WOODEN_PRODUCTS.find(p => p.id === event.target.dataset.model);
+    if (!product) return;
+    selectCustomizerModel(product);
+    window.woodAudio?.playWoodClick(1.1);
   });
 
   // Finish Swatches
@@ -329,17 +257,20 @@ function initCustomizer() {
   // Add custom toy to cart
   if (addCustomBtn) {
     addCustomBtn.addEventListener('click', () => {
-      const customItem = {
-        id: 'custom-' + Date.now(),
-        name: `${customizerState.modelName} (Personalized)`,
-        woodType: customizerState.woodFinish,
-        price: customizerState.price,
-        qty: 1,
-        image: customizerState.image,
-        engraving: `${customizerState.engravedName} • ${customizerState.engravedDate}`
+      const product = WOODEN_PRODUCTS.find(item => item.id === customizerState.modelId);
+      if (!product) return;
+      if (!nameInput.value.trim()) return showToast('Enter a name to engrave.');
+      if (CART.length >= 40) return showToast('Your basket has reached 40 lines.');
+      const personalization = {
+        name: customizerState.engravedName.slice(0, 16),
+        date: dateInput.value.trim() ? customizerState.engravedDate.slice(0, 18) : '',
+        finish: customizerState.woodFinish,
+        font: customizerState.fontClass
       };
-
-      CART.push(customItem);
+      const quantity = CART.filter(item => item.kind === 'product' && item.productId === product.id)
+        .reduce((sum, item) => sum + item.qty, 0);
+      if (quantity >= product.inStock) return showToast('The available quantity is already in your basket.');
+      CART.push(cartEntry(product, 1, personalization, `custom-${crypto.randomUUID()}`));
       updateCartUI();
       openCartDrawer();
       if (window.woodAudio) window.woodAudio.playSuccessChime();
@@ -362,7 +293,7 @@ function updateCustomizerPreview() {
     }
   }
   if (priceEl) {
-    priceEl.textContent = formatINR(customizerState.price);
+    priceEl.textContent = customizerState.price == null ? '—' : formatINR(customizerState.price);
   }
   if (textEl) {
     textEl.textContent = customizerState.engravedName;
@@ -398,20 +329,7 @@ function initCartDrawer() {
     });
   }
 
-  const checkoutBtn = document.getElementById('btn-checkout-now');
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', () => {
-      if (CART.length === 0) {
-        showToast('Your basket is currently empty.');
-        return;
-      }
-      if (window.woodAudio) window.woodAudio.playSuccessChime();
-      showToast('Dispatching from Jarag Nagar, Kolhapur! Thank you for supporting Indian artisans.');
-      setTimeout(() => {
-        closeCartDrawer();
-      }, 2000);
-    });
-  }
+  document.getElementById('btn-checkout-now').addEventListener('click', openCheckout);
 }
 
 function openCartDrawer() {
@@ -427,6 +345,7 @@ function closeCartDrawer() {
 }
 
 function updateCartUI() {
+  persistCart();
   const countBadges = document.querySelectorAll('.cart-count-badge');
   const listEl = document.getElementById('cart-items-container');
   const subtotalEl = document.getElementById('cart-subtotal-price');
@@ -445,73 +364,37 @@ function updateCartUI() {
   }
 
   // Free shipping across India on orders above ₹1,499
-  const freeThreshold = 1499.0;
+  const freeThreshold = SHOP_SHIPPING.freeAt / 100;
   if (shippingFill && shippingText) {
-    const pct = Math.min((subtotal / freeThreshold) * 100, 100);
+    const free = subtotal >= freeThreshold || SHOP_SHIPPING.charge === 0;
+    const pct = free ? 100 : (subtotal / freeThreshold) * 100;
     shippingFill.style.width = `${pct}%`;
-    if (subtotal >= freeThreshold) {
-      shippingText.innerHTML = '🇮🇳 <strong>Free Pan-India Express Delivery Unlocked!</strong>';
+    if (free) {
+      shippingText.textContent = 'Free Pan-India express delivery unlocked!';
     } else {
       const remaining = freeThreshold - subtotal;
-      shippingText.innerHTML = `Add <strong>${formatINR(remaining)}</strong> more for Free Delivery across India!`;
+      shippingText.textContent = `Add ${formatINR(remaining)} more for free delivery across India.`;
     }
   }
 
-  if (!listEl) return;
-
-  if (CART.length === 0) {
-    listEl.innerHTML = `
-      <div style="text-align: center; padding: 60px 20px; color: var(--timber-500);">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 16px; display: block; opacity: 0.5;">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-        <h4 style="font-size: 1.15rem; color: var(--timber-800); margin-bottom: 6px;">Your Basket is Empty</h4>
-        <p style="font-size: 0.9rem;">Explore our handcrafted Kolhapuri wooden collections.</p>
-      </div>
-    `;
-    return;
-  }
-
-  listEl.innerHTML = CART.map(item => `
-    <div class="cart-item-card">
-      <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='assets/images/hero-wooden-toys.jpg'">
-      <div class="cart-item-info">
-        <h4 class="cart-item-title">${item.name}</h4>
-        <div class="cart-item-wood">${item.woodType}</div>
-        ${item.engraving ? `<div style="font-size: 0.76rem; color: var(--honey-600); font-weight: 600; margin-bottom: 6px;">✨ Custom Inscription: "${item.engraving}"</div>` : ''}
-        <div class="cart-item-bottom">
-          <div class="qty-control">
-            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
-            <span class="qty-val">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
-          </div>
-          <span class="cart-item-price">${formatINR(item.price * item.qty)}</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
+  document.getElementById('btn-checkout-now').disabled = !CART.length;
+  if (listEl) window.shopUI.basket({ items: [...CART], onQuantity: changeQty });
 }
 
 function addToCart(productId, event) {
   if (event) event.stopPropagation();
   const prod = WOODEN_PRODUCTS.find(p => p.id === productId);
-  if (!prod) return;
-
-  const existing = CART.find(item => item.id === prod.id && !item.engraving);
+  if (!prod || !prod.inStock) return;
+  const reserved = CART.filter(item => item.kind === 'product' && item.productId === productId)
+    .reduce((sum, item) => sum + item.qty, 0);
+  if (reserved >= prod.inStock) return showToast('The available quantity is already in your basket.');
+  const existing = CART.find(item => item.id === prod.id);
   if (existing) {
-    existing.qty += 1;
+    if (existing.qty >= 99) return showToast('The maximum quantity per basket line is 99.');
+    existing.qty++;
   } else {
-    CART.push({
-      id: prod.id,
-      name: prod.name,
-      woodType: prod.woodType,
-      price: prod.price,
-      qty: 1,
-      image: prod.image,
-      engraving: null
-    });
+    if (CART.length >= 40) return showToast('Your basket has reached 40 lines.');
+    CART.push(cartEntry(prod));
   }
 
   updateCartUI();
@@ -523,8 +406,12 @@ function changeQty(itemId, delta) {
   const itemIndex = CART.findIndex(i => i.id === itemId);
   if (itemIndex === -1) return;
 
-  CART[itemIndex].qty += delta;
-  if (CART[itemIndex].qty <= 0) {
+  const item = CART[itemIndex];
+  const stock = item.kind === 'offer' ? SHOP_OFFERS : WOODEN_PRODUCTS;
+  const limit = Math.min(99, stock.find(product => product.id === item.productId)?.inStock ?? 0);
+  if (delta > 0 && item.qty >= limit) return showToast('The available quantity is already in your basket.');
+  item.qty += delta;
+  if (item.qty <= 0) {
     CART.splice(itemIndex, 1);
   }
 
@@ -544,6 +431,7 @@ function toggleWishlist(productId, event) {
   }
 
   if (window.woodAudio) window.woodAudio.playWoodClick(1.4);
+  savePreference('oak-wishlist', [...WISHLIST]);
   updateWishlistBadges();
   renderProductCatalog(document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all');
 }
@@ -570,34 +458,33 @@ function openQuickView(productId, event) {
   modalContainer.innerHTML = `
     <button class="modal-close-btn" onclick="closeQuickView()">✕</button>
     <div class="modal-media">
-      <img src="${prod.image}" alt="${prod.name}" onerror="this.src='assets/images/hero-wooden-toys.jpg'">
+      <img src="${escapeHTML(prod.image)}" alt="${escapeHTML(prod.name)}" onerror="this.onerror=null; this.src=imageFallback">
     </div>
     <div class="modal-details">
-      <span class="section-badge">${prod.badge}</span>
-      <h2 style="font-size: 1.8rem; margin-bottom: 6px;">${prod.name}</h2>
-      <p style="color: var(--honey-600); font-weight: 600; margin-bottom: 16px;">${prod.woodType}</p>
+      ${prod.badge ? `<span class="section-badge">${escapeHTML(prod.badge)}</span>` : ''}
+      <h2 style="font-size: 1.8rem; margin-bottom: 6px;">${escapeHTML(prod.name)}</h2>
+      <p style="color: var(--honey-600); font-weight: 600; margin-bottom: 16px;">${escapeHTML(prod.woodType)}</p>
       
-      <p style="color: var(--timber-700); line-height: 1.7; margin-bottom: 24px;">${prod.description}</p>
+      <p style="color: var(--timber-700); line-height: 1.7; margin-bottom: 24px;">${escapeHTML(prod.description)}</p>
 
       <div style="background: var(--bg-cream); padding: 18px; border-radius: var(--radius-md); margin-bottom: 24px;">
-        <div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>Dimensions:</strong> ${prod.dimensions}</div>
-        <div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>Weight:</strong> ${prod.weight}</div>
-        <div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>Finish:</strong> ${prod.finish}</div>
-        <div style="font-size: 0.85rem;"><strong>Origin:</strong> Jarag Nagar, Kolhapur, Maharashtra</div>
+        ${[['Dimensions', prod.dimensions], ['Weight', prod.weight], ['Finish', prod.finish], ['Dispatch', prod.leadTime]]
+          .filter(([, value]) => value).map(([label, value]) => `<div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>${label}:</strong> ${escapeHTML(value)}</div>`).join('')}
+        <div style="font-size: 0.85rem;">${prod.inStock ? `${prod.inStock} in stock` : 'Sold out'}</div>
       </div>
 
       <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
         <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--timber-900);">${formatINR(prod.price)}</span>
-        <span style="text-decoration: line-through; color: var(--timber-400);">${formatINR(prod.originalPrice)}</span>
+        ${prod.originalPrice > prod.price ? `<span class="price-original">${formatINR(prod.originalPrice)}</span>` : ''}
       </div>
 
-      <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="addToCart('${prod.id}'); closeQuickView();">
+      <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="addToCart('${prod.id}'); closeQuickView();" ${prod.inStock ? '' : 'disabled'}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
-        Add to Basket • ${formatINR(prod.price)}
+        ${prod.inStock ? `Add to Basket • ${formatINR(prod.price)}` : 'Sold out'}
       </button>
     </div>
   `;
@@ -634,13 +521,20 @@ function initAudioToggle() {
 function initNewsletter() {
   const form = document.getElementById('newsletter-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const input = form.querySelector('input');
-      if (input && input.value) {
+      const button = form.querySelector('button');
+      button.disabled = true;
+      try {
+        await shopRequest('/api/newsletter', { email: input.value });
         if (window.woodAudio) window.woodAudio.playSuccessChime();
-        showToast('Dhanyawad! Welcome to the Kolhapur Woodcraft Family. 10% coupon sent.');
+        showToast('You’re on the workshop mailing list.');
         input.value = '';
+      } catch (error) {
+        showToast(error.message);
+      } finally {
+        button.disabled = false;
       }
     });
   }
@@ -657,7 +551,7 @@ function showToast(message) {
 
   toast.innerHTML = `
     <span class="toast-icon">✓</span>
-    <span>${message}</span>
+    <span>${escapeHTML(message)}</span>
   `;
 
   toast.classList.add('show');

@@ -152,11 +152,14 @@ function initHeaderScroll() {
 /* ============================================================
    5. 3D CARD TILT (Desktop / Pointer:Fine Only)
    ============================================================ */
+const tiltCards = new WeakSet();
 function initCardTilt() {
   if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024) return;
   const cards = document.querySelectorAll('.product-card, .hero-main-card, .toy-display-stage');
 
   cards.forEach(card => {
+    if (tiltCards.has(card)) return;
+    tiltCards.add(card);
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;

@@ -7,6 +7,8 @@
   <meta name="description" content="100% Solid Indian Hardwood Toys handcrafted by Swapnil Kulkarni & Bhavya Kulkarni in Jarag Nagar, Kolhapur. Zero plastics, non-toxic beeswax finishes, generational heirlooms.">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/shop.css">
+  <script type="module" src="/frontend/storefront.jsx"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a4f31'><path d='M12 2L2 22h20L12 2zm0 3.5L18.5 20H5.5L12 5.5z'/></svg>">
 </head>
 <body>
@@ -48,6 +50,7 @@
       <nav class="nav-desktop">
         <ul class="nav-menu">
           <li><a href="#catalog" class="nav-link active">Collections</a></li>
+          <li><a href="#offers" class="nav-link">Special Offers</a></li>
           <li><a href="#species-explorer" class="nav-link">Indian Hardwoods</a></li>
           <li><a href="#customizer" class="nav-link">Engraving Studio</a></li>
           <li><a href="#founders" class="nav-link">Our Founders</a></li>
@@ -59,11 +62,11 @@
       <!-- Header Actions -->
       <div class="nav-actions">
         <!-- Wishlist Button -->
-        <button class="action-btn wishlist-trigger-btn" title="Heirloom Wishlist" onclick="showToast('Your Saved Heirloom Wishlist has ' + WISHLIST.size + ' favorites.'); if(window.woodAudio) window.woodAudio.playWoodClick();">
+        <button type="button" id="wishlist-trigger" class="action-btn wishlist-trigger-btn" title="Heirloom Wishlist" aria-label="View wishlist">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
-          <span class="action-badge wishlist-count-badge">1</span>
+          <span class="action-badge wishlist-count-badge">0</span>
         </button>
 
         <!-- Cart Drawer Trigger -->
@@ -73,7 +76,7 @@
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          <span class="action-badge cart-count-badge">1</span>
+          <span class="action-badge cart-count-badge">0</span>
         </button>
 
         <!-- CTA Button (Desktop) -->
@@ -109,6 +112,7 @@
       </div>
       <ul class="mobile-menu-links">
         <li><a href="#catalog" class="mobile-link" onclick="closeMobileMenu();">Toy Collections</a></li>
+        <li><a href="#offers" class="mobile-link" onclick="closeMobileMenu();">Special Offers</a></li>
         <li><a href="#species-explorer" class="mobile-link" onclick="closeMobileMenu();">Indian Hardwoods</a></li>
         <li><a href="#customizer" class="mobile-link" onclick="closeMobileMenu();">Laser Engraving Studio</a></li>
         <li><a href="#founders" class="mobile-link" onclick="closeMobileMenu();">Our Founders</a></li>
@@ -367,18 +371,23 @@
       </div>
 
       <!-- Category Filter Tabs -->
-      <div class="catalog-filter-bar">
-        <button class="filter-btn active" data-filter="all">All Masterpieces</button>
-        <button class="filter-btn" data-filter="heirloom">Heirloom Nursery</button>
-        <button class="filter-btn" data-filter="vehicles">Vehicles &amp; Locomotives</button>
-        <button class="filter-btn" data-filter="montessori">Montessori &amp; Sensory</button>
-        <button class="filter-btn" data-filter="puzzles">Puzzles &amp; Wadas</button>
-        <button class="filter-btn" data-filter="musical">Acoustic Musical</button>
-      </div>
+      <div class="catalog-filter-bar" id="catalog-filters" aria-label="Filter toy collection"></div>
 
       <!-- Dynamic Products Grid (Populated in INR) -->
       <div id="products-container" class="products-grid">
-        <!-- Rendered dynamically by app.js -->
+        <p role="status">Loading the toy collection…</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="offers" class="offers-section">
+    <div class="container">
+      <div class="text-center section-header">
+        <h2 class="section-title" id="offers-title">Combo &amp; Special Offers</h2>
+        <p class="section-desc" id="offers-description"></p>
+      </div>
+      <div id="offers-list" class="offers-grid">
+        <p role="status">Loading offers…</p>
       </div>
     </div>
   </section>
@@ -411,11 +420,7 @@
           <!-- Step 1: Select Toy Model -->
           <div class="customizer-step">
             <label>1. Select Wooden Toy Model <span>(Handcrafted)</span></label>
-            <div class="custom-model-pills">
-              <button class="model-pill active" data-model="toy-vintage-car">Royal Roadster</button>
-              <button class="model-pill" data-model="toy-rocking-horse">Rocking Horse</button>
-              <button class="model-pill" data-model="toy-train">Deccan Express</button>
-            </div>
+            <div class="custom-model-pills" id="customizer-models"></div>
           </div>
 
           <!-- Step 2: Select Wood Species Finish -->
@@ -458,10 +463,10 @@
           <!-- Checkout Box -->
           <div class="customizer-checkout-box">
             <div class="customizer-price-info">
-              <div class="custom-price" id="customizer-live-price">₹1,399</div>
+              <div class="custom-price" id="customizer-live-price">—</div>
               <div class="custom-free-engrave">✓ Complimentary Laser Engraving Included</div>
             </div>
-            <button id="btn-add-custom-toy" class="btn-primary">
+            <button id="btn-add-custom-toy" class="btn-primary" disabled>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -692,11 +697,8 @@
         <div class="footer-col">
           <h4>Handcrafted Collections</h4>
           <ul>
-            <li><a href="#catalog">Heirloom Nursery</a></li>
-            <li><a href="#catalog">Vehicles &amp; Locomotives</a></li>
-            <li><a href="#catalog">Montessori &amp; Sensory</a></li>
-            <li><a href="#catalog">Puzzles &amp; Wadas</a></li>
-            <li><a href="#catalog">Sur-Tarang Musical</a></li>
+            <li id="footer-categories"></li>
+            <li><a href="#offers">Combo &amp; Special Offers</a></li>
           </ul>
         </div>
 
@@ -729,7 +731,8 @@
       <div class="footer-bottom">
         <div>&copy; 2026 Oak &amp; Whimsy Artisans. Founded by Swapnil &amp; Bhavya Kulkarni, Jarag Nagar, Kolhapur. All Rights Reserved.</div>
         <div class="footer-legal-links">
-          <a href="#">Privacy Policy</a>
+          <button type="button" class="shop-text-action" id="shop-privacy">Privacy</button>
+          <a href="/admin">Shop Admin</a>
           <a href="#">Terms of Handcraft</a>
           <a href="#">Western Ghats Forestry</a>
         </div>
@@ -746,7 +749,7 @@
       </div>
 
       <div class="cart-shipping-bar">
-        <div id="shipping-status-text" class="shipping-text">Add ₹600 more for Free Pan-India Delivery!</div>
+        <div id="shipping-status-text" class="shipping-text"></div>
         <div class="shipping-track">
           <div id="shipping-progress-fill" class="shipping-fill"></div>
         </div>
@@ -759,10 +762,10 @@
       <div class="cart-footer">
         <div class="cart-total-row">
           <span>Subtotal</span>
-          <span id="cart-subtotal-price" class="cart-total-price">₹1,899</span>
+          <span id="cart-subtotal-price" class="cart-total-price">₹0</span>
         </div>
-        <button id="btn-checkout-now" class="btn-checkout">
-          Proceed to Kolhapur Packaging
+        <button type="button" id="btn-checkout-now" class="btn-checkout" disabled>
+          Checkout
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -780,9 +783,44 @@
   </div>
 
   <!-- Scripts -->
+  <dialog id="checkout-dialog" class="shop-dialog" aria-labelledby="checkout-title">
+    <div class="shop-dialog-header">
+      <h2 id="checkout-title">Checkout</h2>
+      <button type="button" class="shop-icon-close" data-close-dialog aria-label="Close checkout">×</button>
+    </div>
+    <p id="checkout-status" class="shop-status" role="status" aria-live="polite"></p>
+    <form id="checkout-form" class="checkout-form" hidden>
+      <div class="shop-fields">
+        <label>Full name<input name="name" autocomplete="name" maxlength="100" required></label>
+        <label>Mobile number<input name="phone" type="tel" autocomplete="tel" maxlength="18" required></label>
+        <label class="shop-span">Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+        <label class="shop-span">Delivery address<textarea name="address" autocomplete="street-address" maxlength="350" required></textarea></label>
+        <label>City<input name="city" autocomplete="address-level2" maxlength="80" required></label>
+        <label>State or union territory<input name="state" autocomplete="address-level1" maxlength="80" required></label>
+        <label>PIN code<input name="postalCode" autocomplete="postal-code" inputmode="numeric" pattern="[1-9][0-9]{5}" maxlength="6" required></label>
+        <label>Country<input value="India" readonly></label>
+      </div>
+      <div id="checkout-summary" class="checkout-summary"></div>
+      <p>Payment method · Cash on delivery</p>
+      <button class="btn-primary" type="submit">Place Order</button>
+    </form>
+  </dialog>
+
+  <dialog id="privacy-dialog" class="shop-dialog" aria-labelledby="privacy-title">
+    <div class="shop-dialog-header">
+      <h2 id="privacy-title">Shop privacy</h2>
+      <button type="button" class="shop-icon-close" data-close-dialog aria-label="Close privacy information">×</button>
+    </div>
+    <p>We use delivery and contact details to fulfil your order. Your basket and wishlist are saved on this browser.</p>
+    <p>The shop counts visits using a random browser identifier. Traffic reports do not include names, email addresses or IP addresses. Traffic records expire after 90 days. The shop respects Global Privacy Control and Do Not Track settings.</p>
+    <p><button type="button" class="btn-secondary" id="traffic-preference">Turn off traffic measurement</button></p>
+    <p id="traffic-preference-status" class="shop-status" role="status"></p>
+  </dialog>
+
   <script src="assets/js/audio.js"></script>
   <script src="assets/js/products.js"></script>
   <script src="assets/js/animations.js"></script>
+  <script src="assets/js/store.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>
