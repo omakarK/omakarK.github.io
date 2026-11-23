@@ -1,0 +1,426 @@
+
+/* ==========================================================================
+   OAK & WHIMSY — ANIMATION ENHANCEMENTS v2.0
+   Dramatic keyframes, section reveals, slot counters, shimmer, particles
+   ========================================================================== */
+
+/* ── KEYFRAMES ───────────────────────────────────────────────────────────── */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes stampIn {
+  0%   { opacity: 0; transform: scale(0) rotate(-18deg); }
+  70%  { opacity: 1; transform: scale(1.18) rotate(3deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes countGlow {
+  0%, 100% { text-shadow: none; }
+  50%       { text-shadow: 0 0 24px rgba(217, 130, 43, 0.75), 0 0 48px rgba(217, 130, 43, 0.3); }
+}
+
+@keyframes woodShimmer {
+  0%   { background-position: -300% 0; }
+  100% { background-position: 300% 0; }
+}
+
+@keyframes shimmerFlash {
+  0%   { filter: brightness(1); }
+  25%  { filter: brightness(1.35) saturate(1.4); }
+  60%  { filter: brightness(1.1) saturate(1.1); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0) rotate(0deg);    opacity: 0.4; }
+  33%       { transform: translateY(-18px) rotate(10deg); opacity: 0.8; }
+  66%       { transform: translateY(-8px) rotate(-6deg);  opacity: 0.5; }
+}
+
+@keyframes borderPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 130, 43, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(217, 130, 43, 0.18); }
+}
+
+@keyframes heroBgDrift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes typewriterCaret {
+  0%, 100% { border-color: var(--honey-400); }
+  50%       { border-color: transparent; }
+}
+
+@keyframes progressGlow {
+  0%, 100% { box-shadow: 0 0 6px rgba(217, 130, 43, 0.5); }
+  50%       { box-shadow: 0 0 16px rgba(217, 130, 43, 0.9), 0 0 32px rgba(194, 111, 28, 0.4); }
+}
+
+@keyframes ringExpand {
+  0%   { transform: scale(0.6); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes waveWobble {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(2deg); }
+  75%       { transform: rotate(-2deg); }
+}
+
+/* ── SCROLL PROGRESS BAR GLOW ────────────────────────────────────────────── */
+#scroll-progress-bar {
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+/* ── SECTION REVEAL ──────────────────────────────────────────────────────── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+.section-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CARD STAGGER ENTRANCE ───────────────────────────────────────────────── */
+.card-enter {
+  opacity: 0;
+  transform: translateY(28px) scale(0.96);
+  transition: opacity 0.55s var(--ease-gentle),
+              transform 0.55s var(--ease-gentle);
+  will-change: opacity, transform;
+}
+.card-enter.card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── SLOT-MACHINE COUNTER GLOW ───────────────────────────────────────────── */
+.counting-glow {
+  animation: countGlow 0.3s ease-in-out infinite;
+  transition: color 0.1s linear;
+}
+.counter-done {
+  animation: none;
+}
+
+/* Stat numbers: BIG on desktop */
+.stat-number {
+  font-size: clamp(2.4rem, 5vw, 4.5rem) !important;
+  font-weight: 900;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 30%, var(--timber-200) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(255,255,255,0.15));
+}
+/* Override gradient during animation so JS colour changes show */
+.counting-glow {
+  -webkit-text-fill-color: unset !important;
+  background: none !important;
+}
+
+/* ── WOOD PARTICLES LAYER ────────────────────────────────────────────────── */
+.wood-particles-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.wood-particle {
+  position: absolute;
+  display: inline-block;
+  animation: floatParticle var(--dur, 7s) ease-in-out infinite;
+  user-select: none;
+}
+
+/* ── HERO SECTION ENHANCEMENTS ───────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+/* Animated gradient bg on hero */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(220, 175, 136, 0.18) 0%,
+    rgba(66, 38, 22, 0.04) 40%,
+    rgba(217, 130, 43, 0.10) 70%,
+    rgba(220, 175, 136, 0.15) 100%
+  );
+  background-size: 300% 300%;
+  animation: heroBgDrift 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* SVG wood-grain ring decoration behind hero content */
+.hero-content {
+  position: relative;
+}
+.hero-content::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: -120px;
+  top: -80px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='none' stroke='%235b3721' stroke-width='1' stroke-dasharray='4 8'/%3E%3Ccircle cx='100' cy='100' r='75' fill='none' stroke='%235b3721' stroke-width='0.7' stroke-dasharray='3 10'/%3E%3Ccircle cx='100' cy='100' r='55' fill='none' stroke='%235b3721' stroke-width='0.5' stroke-dasharray='2 12'/%3E%3Ccircle cx='100' cy='100' r='35' fill='none' stroke='%235b3721' stroke-width='0.4' stroke-dasharray='2 14'/%3E%3C/svg%3E") center/contain no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: -1;
+  animation: waveWobble 8s ease-in-out infinite;
+}
+
+/* ── HERO IMAGE SHIMMER on hover ─────────────────────────────────────────── */
+.hero-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.hero-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.hero-main-card:hover .hero-image-wrap::after {
+  opacity: 1;
+  animation: woodShimmer 1.2s ease-in-out;
+}
+
+/* ── SHIMMER FLASH (Customizer) ──────────────────────────────────────────── */
+.shimmer-flash {
+  animation: shimmerFlash 0.65s ease-out !important;
+}
+
+/* ── PRODUCT CARD ENHANCEMENTS ───────────────────────────────────────────── */
+.product-card {
+  transition: transform 0.35s var(--ease-gentle),
+              box-shadow 0.35s var(--ease-gentle);
+  will-change: transform;
+}
+.product-card:hover {
+  box-shadow:
+    var(--shadow-xl),
+    0 4px 0 var(--honey-500),
+    inset 0 0 0 1px rgba(217, 130, 43, 0.15);
+}
+
+/* Badge stamp-in on product cards */
+.product-badge {
+  animation: stampIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 0.3s;
+}
+
+/* Wood grain sweep on card hover */
+.product-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.07) 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.product-card:hover::after {
+  left: 150%;
+}
+.product-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── STAT CARD RING PULSE ────────────────────────────────────────────────── */
+.stat-card {
+  position: relative;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  animation: borderPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── SECTION HEADER BADGES ───────────────────────────────────────────────── */
+.section-badge {
+  animation: slideInLeft 0.6s ease-out both;
+}
+
+/* ── BUTTON PRIMARY — wood grain overlay ─────────────────────────────────── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    87deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(255, 255, 255, 0.04) 3px,
+    rgba(255, 255, 255, 0.04) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn-primary:hover::after {
+  transform: translateX(100%);
+}
+
+/* ── FOUNDERS BIO QUOTE MARK ─────────────────────────────────────────────── */
+.founders-bio {
+  position: relative;
+}
+.founders-bio::before {
+  content: '\201C';
+  position: absolute;
+  top: -24px;
+  left: -16px;
+  font-size: 7rem;
+  line-height: 1;
+  font-family: var(--font-display);
+  color: var(--honey-400);
+  opacity: 0.12;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── SECTION WAVE DIVIDERS ───────────────────────────────────────────────── */
+.stats-banner {
+  position: relative;
+}
+.stats-banner::before,
+.stats-banner::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0; right: 0;
+  height: 36px;
+  background: var(--bg-cream);
+  pointer-events: none;
+  z-index: 1;
+}
+.stats-banner::before {
+  top: 0;
+  clip-path: ellipse(55% 100% at 50% 0%);
+}
+.stats-banner::after {
+  bottom: 0;
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+/* ── CUSTOMIZER LASER SPARK ──────────────────────────────────────────────── */
+@keyframes laserSpark {
+  0%   { opacity: 0; transform: scale(0.5) translateX(0); }
+  40%  { opacity: 1; transform: scale(1.3) translateX(2px); }
+  100% { opacity: 0; transform: scale(0.9) translateX(-2px); }
+}
+#customizer-toy-image.shimmer-flash {
+  animation: shimmerFlash 0.65s ease-out !important;
+}
+
+/* ── FOOTER ENHANCEMENT ──────────────────────────────────────────────────── */
+.site-footer {
+  position: relative;
+}
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--honey-600), var(--honey-400), var(--timber-300), var(--honey-400), var(--honey-600));
+  background-size: 200% 100%;
+  animation: heroBgDrift 6s ease-in-out infinite;
+}
+
+/* ── HEADER ENHANCED SCROLLED STATE ─────────────────────────────────────── */
+.site-header.scrolled {
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow:
+    0 2px 20px rgba(44, 25, 13, 0.14),
+    0 1px 0 rgba(217, 130, 43, 0.25);
+}
+
+/* ── REDUCED MOTION ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal,
+  .card-enter,
+  .wood-particle,
+  .floating-badge,
+  .btn-primary::after,
+  .hero-section::before,
+  .hero-content::before {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .section-reveal { opacity: 1; transform: none; }
+  .card-enter { opacity: 1; transform: none; }
+}

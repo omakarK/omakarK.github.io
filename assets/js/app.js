@@ -356,6 +356,10 @@ function updateCustomizerPreview() {
   if (imgEl) {
     imgEl.src = customizerState.image;
     imgEl.style.filter = customizerState.woodToneCss;
+    // Trigger shimmer flash animation on finish change
+    if (typeof window.triggerCustomizerShimmer === 'function') {
+      window.triggerCustomizerShimmer(imgEl);
+    }
   }
   if (priceEl) {
     priceEl.textContent = formatINR(customizerState.price);
