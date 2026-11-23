@@ -1,206 +1,204 @@
 /**
- * Handcrafted Wooden Toys Catalog Data
- * 100% Solid Hardwoods - Sustainable, Heirloom Grade, Non-Toxic
+ * Handcrafted Wooden Toys Catalog Data — Indian Heritage Edition
+ * Founders: Swapnil Kulkarni & Bhavya Kulkarni
+ * Workshop: Jarag Nagar, Kolhapur, Maharashtra, India
+ * 100% Solid Indian Hardwoods - Sustainable, Heirloom Grade, Non-Toxic
  */
 
 const WOODEN_PRODUCTS = [
   {
     id: 'toy-rocking-horse',
-    name: 'The Heirloom Oak Rocking Horse',
-    subtitle: 'Classic American White Oak & Black Walnut Rockers',
+    name: 'The Royal Kolhapuri Rocking Horse',
+    subtitle: 'Solid CP Teakwood (Sagwan) & Pure Sheesham Rockers',
     category: 'heirloom',
     categoryLabel: 'Heirloom Nursery',
-    price: 189.00,
-    originalPrice: 220.00,
+    price: 3499.00,
+    originalPrice: 4200.00,
     rating: 4.98,
     reviewsCount: 142,
     badge: 'Artisan Masterpiece',
-    woodType: 'White Oak & Smoked Walnut',
-    finish: 'Organic Beeswax & Cold-Pressed Linseed',
+    woodType: 'Sagwan (Teak) & Solid Sheesham',
+    finish: 'Pure Beeswax & Cold-Pressed Mustard Oil',
     dimensions: '82cm × 34cm × 56cm',
     weight: '5.8 kg',
     recommendedAge: '18 Months - 6 Years',
     inStock: 14,
-    leadTime: 'Handcrafted in 2-3 days',
+    leadTime: 'Handcrafted in Kolhapur workshop in 2-3 days',
     image: 'assets/images/toy-rocking-horse.jpg',
-    fallbackSvg: 'horse',
-    description: 'Carved from century-old sustainably managed white oak with contrasting black walnut rockers. Features ergonomically rounded grip handles, zero nails, and a velvet-smooth hand-buffed finish that invites touch.',
+    description: 'Mastercrafted in Jarag Nagar, Kolhapur using sustainably seasoned CP Sagwan (Teakwood) with contrasting deep Sheesham rockers. Features gentle ergonomic handles, zero nails, and a velvet-smooth natural beeswax finish.',
     features: [
-      'Zero metal fasteners or artificial glues - pure interlocking dowels',
+      'Zero metal fasteners or artificial glues - pure interlocking wooden dowels',
       'Safety anti-tip curved rocking runners designed for gentle momentum',
       'Naturally antimicrobial and hypoallergenic solid wood grain',
-      'Complies with ASTM-F963 & EN-71 child safety standards'
+      'Complies with Indian BIS IS-9873 & International EN-71 child safety standards'
     ],
     reviews: [
-      { author: 'Eleanor Vance', date: '2 days ago', rating: 5, comment: 'An absolute work of art. My 2-year-old daughter rides it daily, and it looks like a museum sculpture in our living room.' },
-      { author: 'Marcus Sterling', date: '1 week ago', rating: 5, comment: 'The oak grain is deeply tactile. You can smell the real honeyed beeswax. Generation-lasting quality.' }
+      { author: 'Snehal Deshmukh', city: 'Pune', date: '2 days ago', rating: 5, comment: 'An absolute work of art. The Sheesham wood grain is magnificent. So proud of this Kolhapur craft!' },
+      { author: 'Vikramaditya Patil', city: 'Kolhapur', date: '1 week ago', rating: 5, comment: 'Visited Swapnil and Bhavya’s workshop in Jarag Nagar. The dedication and precision in every curve is inspiring.' }
     ]
   },
   {
     id: 'toy-train',
-    name: 'Grand Alpine Express Locomotive',
-    subtitle: '5-Piece Articulated Magnetic Timber Train',
+    name: 'Deccan Heritage Express Locomotive',
+    subtitle: '5-Piece Articulated Magnetic Hardwood Train',
     category: 'vehicles',
     categoryLabel: 'Vehicles & Locomotives',
-    price: 94.00,
-    originalPrice: 110.00,
+    price: 1899.00,
+    originalPrice: 2400.00,
     rating: 4.95,
     reviewsCount: 98,
     badge: 'Bestseller',
-    woodType: 'Hard Rock Maple & Black Cherry',
-    finish: 'Pure Jojoba Oil & Carnauba Wax',
+    woodType: 'Seasoned Haldu & Sheesham',
+    finish: 'Natural Jojoba & Coconut Oil Polish',
     dimensions: '58cm total length (4 carriages + engine)',
     weight: '1.4 kg',
     recommendedAge: '2 - 8 Years',
     inStock: 22,
-    leadTime: 'Ready to ship',
+    leadTime: 'Ready to ship from Kolhapur',
     image: 'assets/images/toy-train.jpg',
-    fallbackSvg: 'train',
-    description: 'A tribute to Golden Age rail travel. Each carriage is turned and chamfered from solid maple with embedded child-safe countersunk neodymium magnetic couplers.',
+    description: 'Inspired by the historic Deccan rail journeys. Turned from dense Haldu and polished Sheesham with countersunk child-safe magnetic couplers and whisper-quiet wooden wheels.',
     features: [
       'Whisper-quiet wooden wheels with natural rubber dampening O-rings',
-      'Compatible with standard wooden track gauge systems worldwide',
-      'Carriages include removable miniature wooden cargo barrels and logs',
-      'Individually numbered certificate of artisan origin under the engine'
+      'Compatible with standard wooden track gauge systems across India',
+      'Carriages include removable miniature wooden cargo barrels and teak logs',
+      'Hand-stamped artisan serial seal by Kulkarni Crafts under engine'
     ],
     reviews: [
-      { author: 'David K.', date: '3 days ago', rating: 5, comment: 'My grandson carried this everywhere all weekend. The magnetic click is deeply satisfying.' }
+      { author: 'Dr. Rajeshwari Joshi', city: 'Bengaluru', date: '3 days ago', rating: 5, comment: 'My son carried this everywhere all weekend. The magnetic click is deeply satisfying and safe.' }
     ]
   },
   {
     id: 'toy-montessori-blocks',
-    name: 'Montessori Organic Arch Rainbow & Balancing Stones',
-    subtitle: '12-Tier Steam-Bent Beech & 16 Faceted River Stones',
+    name: 'Montessori Vedic Arch Rainbow & River Stones',
+    subtitle: '12-Tier Steam-Bent Haldu & 16 Balancing River Stones',
     category: 'montessori',
     categoryLabel: 'Montessori & Sensory',
-    price: 88.00,
-    originalPrice: 105.00,
+    price: 1699.00,
+    originalPrice: 2199.00,
     rating: 5.0,
     reviewsCount: 215,
     badge: 'Educator Choice',
-    woodType: 'European Beechwood',
-    finish: 'Natural Plant-Based Pigments & Beeswax',
+    woodType: 'Traditional Wrightia (Aale Mara) & Haldu',
+    finish: 'Turmeric, Indigo & Natural Vegetable Extracts',
     dimensions: '38cm × 19cm × 7cm (Rainbow Arch Base)',
     weight: '2.1 kg',
     recommendedAge: '12 Months - 7 Years',
     inStock: 35,
-    leadTime: 'Ready to ship',
+    leadTime: 'Ready to ship from Kolhapur',
+    image: 'assets/images/toy-montessori-blocks.png',
+    fallbackImage: 'assets/images/toy-montessori-blocks.jpg',
     image: 'assets/images/toy-montessori-blocks.jpg',
-    fallbackSvg: 'rainbow',
-    description: 'Handcrafted from single-origin European beechwood using traditional steam-bending. Designed by Montessori educators to foster open-ended spatial awareness, architectural balance, and fine motor skills.',
+    description: 'Handcrafted from soft-grained Wrightia and Haldu wood. Tinted with natural vegetable extracts (turmeric yellow, madder root red, organic indigo) and sealed with food-grade beeswax.',
     features: [
-      '12 nesting arches steam-bent with zero toxic resins',
-      '16 asymmetrical balancing stones inspired by Japanese Tumi Ishi',
-      'Velvety matte grip finish ensures stacked arches don’t slide abruptly',
-      'Encourages divergent problem solving and open-ended imaginary play'
+      '12 nesting arches steam-bent with zero synthetic chemical resins',
+      '16 asymmetrical balancing stones inspired by river pebbles of the Panchganga',
+      'Velvety matte grip finish ensures stacked arches do not slip abruptly',
+      'Encourages spatial intelligence, fine motor skills, and open-ended imaginary play'
     ],
     reviews: [
-      { author: 'Sarah Jenkins, Montessori Guide', date: 'Yesterday', rating: 5, comment: 'We replaced plastic sensory toys in our classroom with this set. The children spend hours testing different cantilever balances.' }
+      { author: 'Pooja Kulkarni', city: 'Mumbai', date: 'Yesterday', rating: 5, comment: 'We replaced plastic toys in our preschool with this set. The children spend hours testing different cantilever balances.' }
     ]
   },
   {
     id: 'toy-vintage-car',
-    name: '1932 Classic Roadster Speedster',
-    subtitle: 'Sculpted African Mahogany & White Ash Spoke Wheels',
+    name: '1938 Kolhapur Royal Roadster',
+    subtitle: 'Sculpted Indian Teakwood & Pale Ash Spoke Wheels',
     category: 'vehicles',
     categoryLabel: 'Vehicles & Locomotives',
-    price: 76.00,
-    originalPrice: 90.00,
+    price: 1399.00,
+    originalPrice: 1750.00,
     rating: 4.92,
     reviewsCount: 84,
     badge: 'Artisan Pick',
-    woodType: 'Mahogany & White Ash',
-    finish: 'Hand-buffed Organic Walnut Oil',
+    woodType: 'Sagwan (Teak) & White Ash',
+    finish: 'Hand-buffed Organic Walnut & Linseed Oil',
     dimensions: '26cm × 11cm × 9cm',
     weight: '0.85 kg',
     recommendedAge: '2+ Years',
     inStock: 18,
     leadTime: 'Ready to ship',
     image: 'assets/images/toy-vintage-car.jpg',
-    fallbackSvg: 'car',
-    description: 'Inspired by early 20th-century open-top racers. Contoured with aerodynamic boat-tail curves from dense mahogany, featuring free-spinning spoke wheels on solid hardwood axles.',
+    description: 'Inspired by vintage royal motorcars of the Kolhapur princely state. Contoured with aerodynamic boat-tail curves from dense CP Sagwan with free-spinning wooden spoke wheels.',
     features: [
       'Ergonomic hand-grip cockpit sculpted for small hands to grasp securely',
-      'Weighted center of gravity ensures thrilling roll-distance across hardwood floors',
-      'Zero battery, zero electronics - 100% human-powered velocity'
+      'Weighted center of gravity ensures thrilling roll-distance across floors',
+      'Zero batteries, zero electronics - 100% human-powered velocity'
     ],
     reviews: [
-      { author: 'Julian Bell', date: '2 weeks ago', rating: 5, comment: 'Feels substantial and heavy in the best way. My boy rolls it across the whole living room.' }
+      { author: 'Abhishek Shinde', city: 'Kolhapur', date: '2 weeks ago', rating: 5, comment: 'Feels substantial and heavy in the best way. My nephew rolls it across the whole living room.' }
     ]
   },
   {
     id: 'toy-xylophone',
-    name: 'Harmonic Rosewood Pentatonic Chime',
-    subtitle: '8 Precision-Tuned Tonewood Bars & Dual Maple Mallets',
+    name: 'Sur-Tarang Acoustic Rosewood Xylophone',
+    subtitle: '8 Precision-Tuned Indian Sheesham Tonebars',
     category: 'musical',
     categoryLabel: 'Musical Woodcraft',
-    price: 92.00,
-    originalPrice: 115.00,
+    price: 1799.00,
+    originalPrice: 2299.00,
     rating: 4.97,
     reviewsCount: 76,
     badge: 'Harmonic Sound',
-    woodType: 'Honduran Rosewood Tonebars & Birch Soundbox',
-    finish: 'Resonator Shellac & Beeswax',
+    woodType: 'Sheesham Tonebars & Jackfruit Wood Soundbox',
+    finish: 'Natural Shellac & Beeswax Polish',
     dimensions: '34cm × 22cm × 8cm',
     weight: '1.2 kg',
     recommendedAge: '18 Months+',
     inStock: 12,
-    leadTime: 'Hand-tuned in 1 day',
-    image: 'assets/images/toy-train.jpg', // or dedicated image
-    fallbackSvg: 'music',
-    description: 'Tuned to the universal pentatonic scale (C-D-E-G-A), ensuring that every strike produces a naturally soothing, consonant harmony. Free from harsh metallic overtones.',
+    leadTime: 'Hand-tuned in Jarag Nagar workshop',
+    image: 'assets/images/toy-train.jpg',
+    description: 'Tuned to the classical Indian pentatonic scale (Bhoopali / Sa-Re-Ga-Pa-Dha). Every strike with the wooden mallet produces a soothing, resonant acoustic chime without sharp metallic noise.',
     features: [
-      'Hand-tuned to 432Hz calming organic resonance',
-      'Pure natural vibration pads beneath each bar for pure acoustic sustain',
+      'Hand-tuned to soothing 432Hz organic resonance',
+      'Natural rubber isolation dampening beneath each bar for pure acoustic sustain',
       'Includes two ergonomic spherical-head hard maple mallets',
-      'Zero sharp corners or loose resonance pins'
+      'Zero sharp corners, metal pins, or hazardous wires'
     ],
     reviews: [
-      { author: 'Clara Miller', date: '5 days ago', rating: 5, comment: 'The tone is soothing and peaceful, not annoying like plastic musical toys! Even as parents we love hearing it.' }
+      { author: 'Meera Chidambaram', city: 'Chennai', date: '5 days ago', rating: 5, comment: 'The tone is soothing and peaceful, not irritating like cheap plastic musical toys! Even as parents we love hearing it.' }
     ]
   },
   {
     id: 'toy-pull-elephant',
-    name: 'Artisan Pull-Along Timber Elephant',
-    subtitle: 'Articulated Jointed Trunk & Natural Cotton Rope',
+    name: 'Airavata Pull-Along Timber Elephant',
+    subtitle: 'Articulated Jointed Trunk & Natural Jute Cord',
     category: 'heirloom',
     categoryLabel: 'Heirloom Nursery',
-    price: 64.00,
-    originalPrice: 75.00,
+    price: 1199.00,
+    originalPrice: 1499.00,
     rating: 4.89,
     reviewsCount: 63,
     badge: 'Toddler Favorite',
-    woodType: 'Solid English Walnut & Sycamore',
-    finish: 'Food-Safe Jojoba Wax',
+    woodType: 'Solid Kolhapuri Sagwan & Haldu',
+    finish: 'Food-Safe Virgin Coconut Oil & Beeswax',
     dimensions: '22cm × 18cm × 10cm',
     weight: '0.7 kg',
     recommendedAge: '12 Months - 4 Years',
     inStock: 25,
     leadTime: 'Ready to ship',
     image: 'assets/images/toy-rocking-horse.jpg',
-    fallbackSvg: 'elephant',
-    description: 'A charming companion for first steps. As your toddler walks, the offset eccentric cam axles give the elephant a gentle, rhythmic undulating walk while its articulated wooden trunk bobs happily.',
+    description: 'An iconic childhood companion for first steps. As your toddler walks, the eccentric wheel cams give the elephant a lifelike, playful bobbing gait while the articulated trunk waves rhythmically.',
     features: [
-      '100% unbleached organic cotton braided pull rope with wooden safety ball',
-      'Offset wooden wheel cams create lifelike bobbing gait',
-      'Food-grade safe for teething gums'
+      '100% natural braided jute pull cord with smooth wooden safety grip ball',
+      'Offset wheel cams create charming undulating walking motion',
+      'Naturally antimicrobial and 100% food-safe for teething toddlers'
     ],
     reviews: [
-      { author: 'Sophie Laurent', date: '1 week ago', rating: 5, comment: 'Helped my little boy gain confidence learning to walk. He holds the cord everywhere.' }
+      { author: 'Rohit Kulkarni', city: 'Navi Mumbai', date: '1 week ago', rating: 5, comment: 'Helped my little daughter gain confidence while learning to walk. She holds the jute cord everywhere!' }
     ]
   },
   {
     id: 'toy-dollhouse',
-    name: 'Nordic Modular Timber Manor',
-    subtitle: '3-Story Open Architecture with 18 Wooden Furniture Pieces',
+    name: 'Wada Heritage Modular Wooden Manor',
+    subtitle: 'Traditional Maratha Architecture with 18 Carved Wooden Furniture Pieces',
     category: 'puzzles',
     categoryLabel: 'Puzzles & Playsets',
-    price: 240.00,
-    originalPrice: 280.00,
+    price: 4999.00,
+    originalPrice: 6200.00,
     rating: 4.99,
     reviewsCount: 110,
     badge: 'Heirloom Grade',
-    woodType: 'Solid Baltic Birch & Natural Pine',
+    woodType: 'Solid Pine, Mango Wood & Sheesham Trim',
     finish: 'Silk-touch Non-Toxic Carnauba',
     dimensions: '65cm × 48cm × 70cm',
     weight: '7.2 kg',
@@ -208,97 +206,95 @@ const WOODEN_PRODUCTS = [
     inStock: 8,
     leadTime: 'Handcrafted in 3 days',
     image: 'assets/images/hero-wooden-toys.jpg',
-    fallbackSvg: 'house',
-    description: 'An architectural heirloom designed for open 360-degree play. Features movable staircases, sliding timber partitions, skylights, and miniature wooden furniture carved from single blocks of wood.',
+    description: 'An architectural heirloom inspired by historic Kolhapur wadas and courtyards. Features movable carved timber staircases, latticed jali windows, and miniature furniture carved from single blocks of wood.',
     features: [
       'Tool-free interlocking mortise & tenon assembly in under 5 minutes',
-      'Includes dining set, miniature timber cradle, clawfoot bath, and sofa',
-      'Wide open windows capture soft daylight from all angles'
+      'Includes traditional dining chowki, wooden cradle, swing (jhula), and charpoy',
+      'Wide open courtyard structure enables 360-degree collaborative play'
     ],
     reviews: [
-      { author: 'Hannah & Robert', date: '4 days ago', rating: 5, comment: 'The craft on this dollhouse made my wife cry with joy on Christmas morning. Truly magnificent.' }
+      { author: 'Radhika & Aniket', city: 'Satara', date: '4 days ago', rating: 5, comment: 'The craftsmanship on this dollhouse is extraordinary. Reminded us of our ancestral home in Kolhapur.' }
     ]
   },
   {
     id: 'toy-kinetic-run',
-    name: 'Archimedes Kinetic Wooden Gravity Run',
-    subtitle: '48 Modular Interlocking Hardwood Chutes & 12 Wooden Spheres',
+    name: 'Aryabhata Kinetic Gravity Marble Chute',
+    subtitle: '48 Modular Interlocking Hardwood Chutes & 12 Polished Wooden Spheres',
     category: 'puzzles',
     categoryLabel: 'Puzzles & Playsets',
-    price: 135.00,
-    originalPrice: 155.00,
+    price: 2699.00,
+    originalPrice: 3299.00,
     rating: 4.96,
     reviewsCount: 88,
     badge: 'STEM Certified',
-    woodType: 'Precision German Beechwood',
+    woodType: 'Precision Indian Teak & Beechwood',
     finish: 'Pure Beeswax Polish',
     dimensions: 'Infinite modular configurations',
     weight: '3.4 kg',
     recommendedAge: '4 - 12 Years',
     inStock: 19,
-    leadTime: 'Ready to ship',
+    leadTime: 'Ready to ship from Kolhapur',
     image: 'assets/images/toy-montessori-blocks.jpg',
-    fallbackSvg: 'run',
-    description: 'Physics meets master carpentry. Precision CNC-carved spirals, xylophone chime bells, and velocity ramps that teach kinetic momentum, gravity, and trial-and-error engineering.',
+    description: 'Physics meets master Indian carpentry. Precision hand-gouged chutes, velocity spirals, and acoustic chime bells that teach kinetic momentum, gravity, and trial-and-error engineering.',
     features: [
-      'Zero plastic chutes - 100% solid beechwood grooves',
-      'Includes acoustic tuned chime bell that sounds when sphere passes',
-      'Infinite expandable designs with stable interlocking tenon pins'
+      'Zero plastic tracks - 100% solid hardwood grooves',
+      'Includes acoustic tuned chime bell that sounds whenever a wooden marble passes',
+      'Expandable designs with stable interlocking tenon pins'
     ],
     reviews: [
-      { author: 'Dr. Gregory Hall', date: '3 weeks ago', rating: 5, comment: 'Best screen-free toy our family has ever purchased. Captivates adults and children alike.' }
+      { author: 'Prof. Hemant Kulkarni', city: 'Sangli', date: '3 weeks ago', rating: 5, comment: 'Best screen-free toy our family has purchased. Captivates adults and children alike!' }
     ]
   }
 ];
 
-// Wood species educational database for interactive explorer
+// Celebrated Indian Hardwoods educational database
 const WOOD_SPECIES_DATA = {
-  oak: {
-    name: 'American White Oak',
-    botanical: 'Quercus alba',
-    origin: 'Appalachian Sustainable Certified Forests',
-    jankaHardness: '1,360 lbf (Exceptional Durability)',
-    grainCharacter: 'Prominent, warm golden rays with deep tactile rings',
-    bestFor: 'Heirloom Rocking Horses & Structural Furniture',
-    scent: 'Warm, rich earthy woodland bouquet',
-    colorHex: '#D8AB6F',
-    quote: 'Oak has guarded ships and castles for millennia. In a child’s toy, it withstands decades of active play without splintering.',
-    ecoRating: '100% FSC® Certified Fallen & Managed Harvest'
+  sagwan: {
+    name: 'CP Teakwood (Sagwan)',
+    botanical: 'Tectona grandis',
+    origin: 'Central Indian & Western Ghats Forests',
+    jankaHardness: '1,155 lbf (Legendary Weather & Shock Resistance)',
+    grainCharacter: 'Golden-amber with straight handsome grain and natural silk sheen',
+    bestFor: 'The Royal Rocking Horse, Heirloom Roadsters & Wagons',
+    scent: 'Rich, natural leathery woody bouquet with natural teak oils',
+    colorHex: '#C59550',
+    quote: 'Sagwan has built royal Maratha palaces and sea-going ships for centuries. In a child’s toy, it withstands generations of active play without warping.',
+    ecoRating: '100% Forest Department Certified Timber'
   },
-  walnut: {
-    name: 'American Black Walnut',
-    botanical: 'Juglans nigra',
-    origin: 'Midwestern River Valleys, USA',
-    jankaHardness: '1,010 lbf (Dense & Velvety)',
-    grainCharacter: 'Deep espresso to chocolate swirl with lustrous satiny sheen',
-    bestFor: 'Accent trims, heirloom contrast details, classic roadsters',
-    scent: 'Rich, subtle nutty warmth',
-    colorHex: '#523420',
-    quote: 'Prized for its natural deep chocolate coloration—requiring zero artificial chemical stains or synthetic dyes.',
-    ecoRating: 'Regenerative Replanting Ratio 3:1'
+  sheesham: {
+    name: 'Indian Rosewood (Sheesham)',
+    botanical: 'Dalbergia sissoo',
+    origin: 'Sub-Himalayan & Maharashtra River Valleys',
+    jankaHardness: '1,660 lbf (Ultra-Dense Heirloom Hardwood)',
+    grainCharacter: 'Deep espresso to golden-brown swirl with luminous satiny grain',
+    bestFor: 'Accent trims, tonebars, rocking rails, and heirloom keepsakes',
+    scent: 'Subtle sweet spicy aromatic rosewood note',
+    colorHex: '#4A2511',
+    quote: 'Prized worldwide for its natural deep chocolate streaks—requiring zero artificial chemical stains or synthetic dyes.',
+    ecoRating: 'Sustainably Managed Farmed Timber'
   },
-  maple: {
-    name: 'Hard Rock Sugar Maple',
-    botanical: 'Acer saccharum',
-    origin: 'New England Hardwood Ridges',
-    jankaHardness: '1,450 lbf (Ultra-Dense Impact Resistance)',
-    grainCharacter: 'Silky cream with closed pores, ultra-smooth satin surface',
-    bestFor: 'Teething rings, stacking blocks, locomotive wheels',
-    scent: 'Sweet, gentle organic maple sap note',
-    colorHex: '#EED9B3',
-    quote: 'Because its pores are microscopic, it will never shed splinters—making it the safest tonewood for baby teething.',
-    ecoRating: 'Sustainably Managed Forest Heritage'
+  haldu: {
+    name: 'Golden Haldu Wood',
+    botanical: 'Haldina cordifolia',
+    origin: 'Deccan Plateau & Western Ghats Foothills',
+    jankaHardness: '1,200 lbf (Fine-Textured & Splinter-Proof)',
+    grainCharacter: 'Lustrous pale golden-yellow with uniform closed pores',
+    bestFor: 'Teething toys, Montessori stacking blocks, sensory arches',
+    scent: 'Clean, neutral organic forest aroma',
+    colorHex: '#E5C07B',
+    quote: 'Because its pores are ultra-compact, it polishes to an exquisite silk finish that will never shed splinters—making it the safest choice for teething toddlers.',
+    ecoRating: 'Non-Threatened Traditional Artisan Timber'
   },
-  beech: {
-    name: 'European Mountain Beech',
-    botanical: 'Fagus sylvatica',
-    origin: 'Bavarian Alps, Germany',
-    jankaHardness: '1,300 lbf (Shock Absorbing & Flexible)',
-    grainCharacter: 'Pale honey with distinctive tiny flecked pores',
-    bestFor: 'Steam-bent Montessori arches, balancing pebbles',
-    scent: 'Clean, light alpine forest fragrance',
-    colorHex: '#E3C193',
-    quote: 'The ultimate wood for steam-bending curves without breaking. Bends gracefully under steam, sets rock-hard for life.',
-    ecoRating: 'PEFC Certified Sustainable Timber'
+  wrightia: {
+    name: 'Ivory Wood (Aale Mara / Ankudu)',
+    botanical: 'Wrightia tinctoria',
+    origin: 'Southern Maharashtra & Karnataka Forest Reserves',
+    jankaHardness: '950 lbf (Velvety, Lightweight & Teething-Safe)',
+    grainCharacter: 'Creamy ivory white, exceptionally soft on delicate gums',
+    bestFor: 'Traditional natural lacquerware rattles, beads & spinning tops',
+    scent: 'Mild, sweet organic botanical note',
+    colorHex: '#F3E5C8',
+    quote: 'The traditional wood chosen by centuries of Indian toy artisans. Naturally non-toxic and traditionally used in Ayurvedic teething remedies.',
+    ecoRating: 'Sustainable Regenerative Agro-Forestry'
   }
 };

@@ -1,16 +1,18 @@
-# Oak & Whimsy — 100% Handcrafted Wooden Toys & Heirlooms
+# Oak & Whimsy — 100% Handcrafted Indian Wooden Toys & Heirlooms
 
-An animated, luxury e-commerce showcase website for an exclusive wooden toy workshop that crafts only 100% solid hardwood toys.
+An animated, luxury e-commerce website for an exclusive wooden toy workshop founded by **Swapnil Kulkarni** and **Bhavya Kulkarni** in **Jarag Nagar, Kolhapur, Maharashtra, India**.
 
 ---
 
 ## 🌟 Highlights
-- **100% Handcrafted Solid Wood**: Zero plastics, zero toxic finishes, child-safe ASTM-F963 & EN-71 standards.
-- **Organic Web Audio Synthesizer**: Custom acoustic sound engine using Web Audio API to reproduce the organic resonance of wooden blocks, clicks, and marimba chimes.
-- **Interactive Hardwood Species Explorer**: Deep dive into American White Oak, Black Walnut, Sugar Maple, and Mountain Beech with Janka hardness ratings and tactile grain properties.
-- **Live Laser Engraving Studio**: Real-time pyrography preview where customers can personalize toys with their child's name and birth year.
-- **Interactive 3D Card Tilt & Parallax**: Smooth physics-based interactive hover effects and fluid entrance animations.
-- **Slide-Out Basket Drawer**: Full cart functionality with quantity adjustments, free shipping progress bar, and checkout simulation.
+- **100% Solid Indian Hardwoods**: Hand-carved from seasoned CP Sagwan (Teakwood), Indian Rosewood (Sheesham), Golden Haldu, and Ivory Wood (Wrightia).
+- **Founders**: Swapnil Kulkarni & Bhavya Kulkarni.
+- **Workshop & Studio**: Plot No. 42, Near Datta Mandir, Jarag Nagar, Kolhapur - 416008, Maharashtra, India.
+- **Indian Pricing (₹ INR)**: Complete Indian Rupee formatting with free express shipping across India on orders above ₹1,499.
+- **Zero Plastics & Child-Safe**: Treated exclusively with food-grade beeswax and cold-pressed natural oils, meeting BIS IS-9873 standards.
+- **Organic Web Audio Synthesizer**: Acoustic sound engine replicating resonant hardwood taps and marimba chimes.
+- **Live Laser Engraving Studio**: Real-time laser pyrography preview where customers can inscribe their child's name and town onto the wooden toy surface.
+- **Slide-Out Basket Drawer**: Full cart functionality in ₹ INR with free delivery progress tracker.
 
 ---
 
@@ -18,9 +20,9 @@ An animated, luxury e-commerce showcase website for an exclusive wooden toy work
 
 ### Step 1: Create a New GitHub Repository
 1. Go to [github.com/new](https://github.com/new).
-2. Name your repository (e.g. `wooden-toys` or `oak-and-whimsy`).
+2. Name your repository (e.g. `wooden-toys` or `kolhapur-wooden-toys`).
 3. Set it to **Public**.
-4. Leave "Add a README file" unchecked (we already created one).
+4. Leave "Add a README file" unchecked.
 5. Click **Create repository**.
 
 ### Step 2: Push Your Local Code to GitHub
@@ -33,39 +35,11 @@ git push -u origin main
 
 ### Step 3: Enable GitHub Pages
 1. Go to your repository on GitHub.
-2. Click **Settings** (tab at the top right).
-3. In the left sidebar, click **Pages** (under the "Code and automation" section).
-4. Under **Build and deployment** -> **Branch**:
-   - Select **main** branch.
-   - Select folder: **/ (root)**.
-   - Click **Save**.
+2. Click **Settings** (top right tab).
+3. In the left sidebar, click **Pages**.
+4. Under **Build and deployment &rarr; Branch**, select **main** and folder **/(root)**, then click **Save**.
 5. Within 1 to 2 minutes, your website will be live at:
    `https://<YOUR-USERNAME>.github.io/<YOUR-REPO-NAME>/`
-
----
-
-## 📁 Project Structure
-```
-LayoutDemo/
-├── index.html                   # Main semantic website entry point
-├── README.md                    # Deployment guide & documentation
-├── .gitignore                   # Ignored files
-└── assets/
-    ├── css/
-    │   └── styles.css           # Luxury design system, animations & responsive styling
-    ├── js/
-    │   ├── audio.js             # Web Audio API organic wooden acoustic synthesizer
-    │   ├── products.js          # Catalog data & wood species educational database
-    │   ├── animations.js        # 3D perspective tilt, parallax & counter tickers
-    │   └── app.js               # Cart drawer, customizer logic, quick-view & filters
-    └── images/
-        ├── hero-wooden-toys.jpg      # Commercial hero photography
-        ├── toy-train.jpg             # Handcrafted timber locomotive
-        ├── toy-rocking-horse.jpg     # Heirloom oak rocking horse
-        ├── toy-montessori-blocks.jpg # Beech Montessori rainbow arches
-        ├── toy-vintage-car.jpg       # Mahogany & ash classic roadster
-        └── artisan-workshop.jpg      # Master woodworker carving in studio
-```
 
 ---
 

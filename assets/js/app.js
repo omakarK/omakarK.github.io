@@ -1,15 +1,17 @@
 /**
  * Oak & Whimsy - Core Interactive Application Logic
- * Manages products catalog, cart, wishlist, live customizer, and modals.
+ * Founders: Swapnil Kulkarni & Bhavya Kulkarni
+ * Workshop: Jarag Nagar, Kolhapur, Maharashtra, India
+ * Currency: Indian Rupee (₹ INR)
  */
 
 // Cart & Wishlist state
 let CART = [
   {
     id: 'toy-train',
-    name: 'Grand Alpine Express Locomotive',
-    woodType: 'Hard Rock Maple & Black Cherry',
-    price: 94.00,
+    name: 'Deccan Heritage Express Locomotive',
+    woodType: 'Seasoned Haldu & Sheesham',
+    price: 1899.00,
     qty: 1,
     image: 'assets/images/toy-train.jpg',
     engraving: null
@@ -29,6 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateWishlistBadges();
   initNewsletter();
 });
+
+// Helper for Indian Rupee Currency Formatting
+function formatINR(amount) {
+  return '₹' + Number(amount).toLocaleString('en-IN', {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 0
+  });
+}
 
 /* --- 1. Product Catalog Rendering --- */
 function renderProductCatalog(filterCategory = 'all') {
@@ -88,8 +98,8 @@ function renderProductCatalog(filterCategory = 'all') {
 
           <div class="product-price-row">
             <div class="price-wrap">
-              <span class="price-current">$${product.price.toFixed(2)}</span>
-              <span class="price-original">$${product.originalPrice.toFixed(2)}</span>
+              <span class="price-current">${formatINR(product.price)}</span>
+              <span class="price-original">${formatINR(product.originalPrice)}</span>
             </div>
             <button class="btn-add-cart" onclick="addToCart('${product.id}', event)">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -136,7 +146,7 @@ function initCatalogFilters() {
   });
 }
 
-/* --- 2. Interactive Wood Species Explorer --- */
+/* --- 2. Interactive Indian Hardwood Species Explorer --- */
 function initWoodSpeciesExplorer() {
   const tabs = document.querySelectorAll('.species-tab');
   const card = document.getElementById('species-card-content');
@@ -152,13 +162,13 @@ function initWoodSpeciesExplorer() {
       if (!data) return;
 
       if (window.woodAudio) {
-        window.woodAudio.playWoodClick(woodKey === 'walnut' ? 0.75 : woodKey === 'oak' ? 1.0 : 1.35);
+        window.woodAudio.playWoodClick(woodKey === 'sheesham' ? 0.75 : woodKey === 'sagwan' ? 1.0 : 1.35);
       }
 
       card.style.opacity = '0.4';
       setTimeout(() => {
         card.innerHTML = `
-          <div class="species-visual" style="background: linear-gradient(135deg, ${data.colorHex}, #2a1608);">
+          <div class="species-visual" style="background: linear-gradient(135deg, ${data.colorHex}, #231206);">
             <div class="wood-texture-overlay"></div>
             <div class="species-visual-content">
               <h3>${data.name}</h3>
@@ -215,15 +225,15 @@ function scrollToCatalog(woodType) {
   }
 }
 
-/* --- 3. Live Wooden Toy Customizer / Engraver --- */
+/* --- 3. Live Wooden Toy Customizer / Engraver Studio --- */
 let customizerState = {
   modelId: 'toy-vintage-car',
-  modelName: '1932 Classic Roadster Speedster',
-  price: 76.00,
-  woodFinish: 'Golden Honey Beech',
+  modelName: '1938 Kolhapur Royal Roadster',
+  price: 1399.00,
+  woodFinish: 'Natural CP Sagwan (Teak)',
   woodToneCss: 'sepia(0.2) saturate(1.1)',
-  engravedName: 'OLIVER',
-  engravedDate: 'EST. 2026',
+  engravedName: 'AARAV',
+  engravedDate: 'KOLHAPUR • 2026',
   fontClass: 'font-fraunces',
   image: 'assets/images/toy-vintage-car.jpg'
 };
@@ -263,11 +273,11 @@ function initCustomizer() {
 
       customizerState.woodFinish = swatch.getAttribute('data-finish-name');
       const tone = swatch.getAttribute('data-tone');
-      customizerState.woodToneCss = tone === 'walnut' 
-        ? 'brightness(0.8) contrast(1.15) sepia(0.5)'
-        : tone === 'cherry'
-        ? 'sepia(0.35) hue-rotate(-15deg) saturate(1.2)'
-        : 'sepia(0.15) saturate(1.1)';
+      customizerState.woodToneCss = tone === 'sheesham' 
+        ? 'brightness(0.78) contrast(1.2) sepia(0.55)'
+        : tone === 'haldu'
+        ? 'sepia(0.3) hue-rotate(-10deg) saturate(1.25)'
+        : 'sepia(0.2) saturate(1.1)';
 
       updateCustomizerPreview();
       if (window.woodAudio) window.woodAudio.playWoodClick(0.9);
@@ -290,7 +300,7 @@ function initCustomizer() {
   // Date input
   if (dateInput) {
     dateInput.addEventListener('input', (e) => {
-      const val = e.target.value.trim().toUpperCase() || 'EST. 2026';
+      const val = e.target.value.trim().toUpperCase() || 'KOLHAPUR • 2026';
       customizerState.engravedDate = val;
       const dateEl = document.getElementById('custom-engraved-date');
       if (dateEl) {
@@ -332,7 +342,7 @@ function initCustomizer() {
       updateCartUI();
       openCartDrawer();
       if (window.woodAudio) window.woodAudio.playSuccessChime();
-      showToast(`Personalized "${customizerState.engravedName}" wood toy added to cart!`);
+      showToast(`Personalized "${customizerState.engravedName}" toy added to Kolhapur workshop basket!`);
     });
   }
 }
@@ -347,7 +357,7 @@ function updateCustomizerPreview() {
     imgEl.style.filter = customizerState.woodToneCss;
   }
   if (priceEl) {
-    priceEl.textContent = `$${customizerState.price.toFixed(2)}`;
+    priceEl.textContent = formatINR(customizerState.price);
   }
   if (textEl) {
     textEl.textContent = customizerState.engravedName;
@@ -391,10 +401,10 @@ function initCartDrawer() {
         return;
       }
       if (window.woodAudio) window.woodAudio.playSuccessChime();
-      showToast('Preparing your artisanal woodcraft package! Thank you.');
+      showToast('Dispatching from Jarag Nagar, Kolhapur! Thank you for supporting Indian artisans.');
       setTimeout(() => {
         closeCartDrawer();
-      }, 1800);
+      }, 2000);
     });
   }
 }
@@ -426,19 +436,19 @@ function updateCartUI() {
   });
 
   if (subtotalEl) {
-    subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    subtotalEl.textContent = formatINR(subtotal);
   }
 
-  // Free shipping at $150
-  const freeThreshold = 150.0;
+  // Free shipping across India on orders above ₹1,499
+  const freeThreshold = 1499.0;
   if (shippingFill && shippingText) {
     const pct = Math.min((subtotal / freeThreshold) * 100, 100);
     shippingFill.style.width = `${pct}%`;
     if (subtotal >= freeThreshold) {
-      shippingText.innerHTML = '🌿 <strong>Free Carbon-Neutral Shipping Unlocked!</strong>';
+      shippingText.innerHTML = '🇮🇳 <strong>Free Pan-India Express Delivery Unlocked!</strong>';
     } else {
-      const remaining = (freeThreshold - subtotal).toFixed(2);
-      shippingText.innerHTML = `Add <strong>$${remaining}</strong> more for Free Worldwide Heirloom Shipping!`;
+      const remaining = freeThreshold - subtotal;
+      shippingText.innerHTML = `Add <strong>${formatINR(remaining)}</strong> more for Free Delivery across India!`;
     }
   }
 
@@ -453,7 +463,7 @@ function updateCartUI() {
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
         <h4 style="font-size: 1.15rem; color: var(--timber-800); margin-bottom: 6px;">Your Basket is Empty</h4>
-        <p style="font-size: 0.9rem;">Explore our handcrafted heirloom collections.</p>
+        <p style="font-size: 0.9rem;">Explore our handcrafted Kolhapuri wooden collections.</p>
       </div>
     `;
     return;
@@ -465,14 +475,14 @@ function updateCartUI() {
       <div class="cart-item-info">
         <h4 class="cart-item-title">${item.name}</h4>
         <div class="cart-item-wood">${item.woodType}</div>
-        ${item.engraving ? `<div style="font-size: 0.76rem; color: var(--honey-600); font-weight: 600; margin-bottom: 6px;">✨ Engraving: "${item.engraving}"</div>` : ''}
+        ${item.engraving ? `<div style="font-size: 0.76rem; color: var(--honey-600); font-weight: 600; margin-bottom: 6px;">✨ Custom Inscription: "${item.engraving}"</div>` : ''}
         <div class="cart-item-bottom">
           <div class="qty-control">
             <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
             <span class="qty-val">${item.qty}</span>
             <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
           </div>
-          <span class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</span>
+          <span class="cart-item-price">${formatINR(item.price * item.qty)}</span>
         </div>
       </div>
     </div>
@@ -568,12 +578,12 @@ function openQuickView(productId, event) {
         <div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>Dimensions:</strong> ${prod.dimensions}</div>
         <div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>Weight:</strong> ${prod.weight}</div>
         <div style="font-size: 0.85rem; margin-bottom: 6px;"><strong>Finish:</strong> ${prod.finish}</div>
-        <div style="font-size: 0.85rem;"><strong>Safety:</strong> Certified Non-Toxic & Child-Safe</div>
+        <div style="font-size: 0.85rem;"><strong>Origin:</strong> Jarag Nagar, Kolhapur, Maharashtra</div>
       </div>
 
       <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
-        <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--timber-900);">$${prod.price.toFixed(2)}</span>
-        <span style="text-decoration: line-through; color: var(--timber-400);">$${prod.originalPrice.toFixed(2)}</span>
+        <span style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--timber-900);">${formatINR(prod.price)}</span>
+        <span style="text-decoration: line-through; color: var(--timber-400);">${formatINR(prod.originalPrice)}</span>
       </div>
 
       <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="addToCart('${prod.id}'); closeQuickView();">
@@ -582,7 +592,7 @@ function openQuickView(productId, event) {
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
-        Add to Basket • $${prod.price.toFixed(2)}
+        Add to Basket • ${formatINR(prod.price)}
       </button>
     </div>
   `;
@@ -609,7 +619,7 @@ function initAudioToggle() {
     if (window.woodAudio) {
       const enabled = window.woodAudio.toggleSound();
       if (pulse) pulse.classList.toggle('muted', !enabled);
-      if (label) label.textContent = enabled ? 'Organic Wood Audio: ON' : 'Audio: OFF';
+      if (label) label.textContent = enabled ? 'Wood Audio: ON' : 'Audio: OFF';
       if (enabled) window.woodAudio.playWoodClick(1.5);
     }
   });
@@ -624,7 +634,7 @@ function initNewsletter() {
       const input = form.querySelector('input');
       if (input && input.value) {
         if (window.woodAudio) window.woodAudio.playSuccessChime();
-        showToast('Welcome to the Woodcraft Guild! Check your inbox for your 10% welcome token.');
+        showToast('Dhanyawad! Welcome to the Kolhapur Woodcraft Family. 10% coupon sent.');
         input.value = '';
       }
     });
