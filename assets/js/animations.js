@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingElements();
 });
 
-// 3D Card Tilt for Product Cards and Hero Visual
+// 3D Card Tilt for Product Cards and Hero Visual (Desktop Only)
 function initCardTilt() {
+  if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024) return;
   const cards = document.querySelectorAll('.product-card, .hero-main-card, .toy-display-stage');
 
   cards.forEach(card => {

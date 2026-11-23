@@ -703,3 +703,16 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
   if (window.woodAudio) window.woodAudio.playWoodClick(0.9);
 }
+
+// Auto-handle dynamic screen resizing smoothly
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1024) {
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    if (backdrop && backdrop.classList.contains('active')) {
+      closeMobileMenu();
+    }
+  }
+  if (window.initCardTilt) {
+    window.initCardTilt();
+  }
+}, { passive: true });
